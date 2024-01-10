@@ -8,8 +8,8 @@ import streamlit as st
 st.set_page_config(layout="wide")
 
 # Load data
-desapareguts = pd.read_csv("../data/Cens_de_persones_desaparegudes_durant_la_Guerra_Civil_clean.csv")
-provincies = pd.read_csv("../data/provincies.csv")
+desapareguts = pd.read_csv("data/Cens_de_persones_desaparegudes_durant_la_Guerra_Civil_clean.csv")
+provincies = pd.read_csv("data/provincies.csv")
 
 # Join data with provinces information
 df_naixement = desapareguts.groupby(["Provincia.naixement"])["Provincia.naixement"].count().reset_index(name="count")
