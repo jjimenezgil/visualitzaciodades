@@ -3,7 +3,7 @@ import pandas as pd
 import folium
 from streamlit_folium import folium_static
 import json
-#import geopandas
+import geopandas
 
 
 # Config page
@@ -14,12 +14,12 @@ desapareguts = pd.read_csv("data/Cens_de_persones_desaparegudes_durant_la_Guerra
 provincies = pd.read_csv("data/provincies.csv")
 with open("data/spain-provinces.geojson") as f:
     geojson_data = json.load(f)
-#geodf = geopandas.GeoDataFrame.from_features(geojson_data, crs="EPSG:4326")
+geodf = geopandas.GeoDataFrame.from_features(geojson_data, crs="EPSG:4326")
 
 # Join data with provinces information
 df_naixement = desapareguts.groupby(["Provincia.naixement"])["Provincia.naixement"].count().reset_index(name="count")
 df_naixement = df_naixement.merge(provincies, how="left", left_on="Provincia.naixement", right_on="nom_cat")
-#df_naixement = geodf.merge(df_naixement, how="left", left_on="name", right_on="nom_GeoJSON")
+df_naixement = geodf.merge(df_naixement, how="left", left_on="name", right_on="nom_GeoJSON")
 
 # Create select box for the different maps
 choice = ['Mapa de les províncies de naixement de les persones desaparegudes',
@@ -33,8 +33,7 @@ choice_selected = st.selectbox("Selecciona el mapa", choice, index=2)
 m = folium.Map(location=[40.41, -3.7], tiles='CartoDB positron', zoom_start=7)
 
 # Append geoJSON province limits to the map
-#folium.GeoJson(geodf, name="Provinces map").add_to(m)
-folium.GeoJson(geojson_data, name="Provinces map").add_to(m)
+folium.GeoJson(geodf, name="Provinces map").add_to(m)
 
 # Show map
 folium_static(m, width=1600, height=950)
