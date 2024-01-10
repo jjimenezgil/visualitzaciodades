@@ -40,7 +40,7 @@ tooltip = folium.GeoJsonTooltip(
     sticky=False,
     labels=True
 )
-folium.GeoJson(geodf, name="Provinces map", tooltip=tooltip).add_to(m)
+folium.GeoJson(df_naixement, name="Provinces map", tooltip=tooltip).add_to(m)
 
 # Show map
 folium_static(m, width=1600, height=950)
