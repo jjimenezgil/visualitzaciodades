@@ -30,8 +30,8 @@ choice_selected = st.selectbox("Selecciona el mapa", choice, index=2)
 m = folium.Map(location=[40.41, -3.7], tiles='CartoDB positron', zoom_start=7)
 
 # Append geoJSON province limits to the map
-folium.GeoJson(geojson_data, name="Provinces map").add_to(m)
-# folium.features.GeoJson('states_india.geojson', name="LSOA Code", popup=folium.features.GeoJsonPopup(fields=['st_nm'])).add_to(m)
+#folium.GeoJson(geojson_data, name="Provinces map").add_to(m)
+folium.features.GeoJson(geojson_data, name="Provinces map").add_to(m)
 
 # Show map
 folium_static(m, width=1600, height=950)
