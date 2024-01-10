@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import folium
-# from streamlit_folium import folium_static
+from streamlit_folium import folium_static
 
 
 # Config page
@@ -25,3 +25,4 @@ choice_selected = st.selectbox("Selecciona el mapa", choice, index=2)
 
 # Create map
 m = folium.Map(location=[40.41, -3.7], tiles='CartoDB positron', zoom_start=5)
+folium_static(m, width=1600, height=950)
