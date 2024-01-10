@@ -1,0 +1,328 @@
+---
+title: 'Visualització de dades: PRA1 - Selecció i preparació d''un joc de dades'
+author: "Autor: Javier Jiménez Gil"
+date: "Decembre 2023"
+output:
+  html_document:
+    highlight: default
+    number_sections: yes
+    theme: cosmo
+    toc: yes
+    toc_depth: 2
+  word_document: default
+  pdf_document:
+    highlight: zenburn
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Càrrega i processament inicial
+
+```{r message= FALSE, warning=FALSE}
+# Carreguem llibreries necessàries
+if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
+
+# Carreguem les dades
+fileName <- "Cens_de_persones_desaparegudes_durant_la_Guerra_Civil.csv"
+myData <- read.csv(fileName, row.names=NULL)
+
+# Mostrem les dimensions del nostre dataframe
+dim(myData)
+```
+```{r message= FALSE, warning=FALSE}
+# Primer resum de les dades
+summary(myData)
+```
+
+
+```{r message= FALSE, warning=FALSE}
+# Canviar noms d'algunes variables (sobretot eliminar accents)
+
+myData <- myData %>% rename(
+  'Id' = 'Id.Afectat',
+  'Provincia.naixement' = 'Província.naixement',
+  'Pais.estranger.naixement' = 'País.estranger.naixement',
+  'Periode.naixement_1' = 'Període.naixement_1',
+  'Periode.naixement_2' = 'Període.naixement_2',
+  'Provincia.habitual' = 'Província.habitual',
+  'Es.militar' = 'És.militar',
+  'Data.mobilitzacio' = 'Data.mobilització',
+  'Es.voluntari' = 'És.voluntari',
+  'Exercit' = 'Exèrcit',
+  'Professio' = 'Professió',
+  'Data.desaparicio' = 'Data.desaparició',
+  'Periode.desaparicio_1' = 'Període.desaparició_1',
+  'Periode.desaparicio_2' = 'Període.desaparició_2',
+  'Indret.desaparicio' = 'Indret.desaparició',
+  'Comarca.desaparicio' = 'Comarca.desaparició',
+  'Provincia.desaparicio' = 'Província.desaparició',
+  'Pais.desaparicio' = 'País.desaparició',
+  'Es.afusellat' = 'És.afusellat',
+  'Periode.afusellament_1' = 'Període.afusellament_1',
+  'Periode.afusellament_2' = 'Període.afusellament_2',
+  'Provincia.afusellament' = 'Província.afusellament',
+  'Pais.afusellament' = 'País.afusellament',
+  'Provincia.localitzat' = 'Província.localitzat'
+)
+```
+
+```{r message= FALSE, warning=FALSE}
+# Transformació en factor dels camps identificats com a tal
+
+myData$Sexe <- factor(myData$Sexe)
+myData$Es.militar <- factor(myData$Es.militar)
+myData$Es.voluntari <- factor(myData$Es.voluntari)
+myData$Es.afusellat <- factor(myData$Es.afusellat)
+myData$Exercit <- factor(myData$Exercit)
+myData$Localitzat <- factor(myData$Localitzat)
+```
+
+```{r message= FALSE, warning=FALSE}
+# Segon resum de les dades
+summary(myData)
+```
+
+
+```{r message= FALSE, warning=FALSE}
+# Eliminem camps de municipi, comarca
+n = c("Id", "Nom.Desaparegut", "Sexe", "Provincia.naixement", "Pais.estranger.naixement", "Data.naixement", "Periode.naixement_1", "Periode.naixement_2", "Provincia.habitual", "Es.militar", "Data.mobilitzacio", "Lleva", "Es.voluntari", "Exercit", "Unitat.militar", "Professio", "Data.desaparicio", "Periode.desaparicio_1", "Periode.desaparicio_2", "Indret.desaparicio", "Provincia.desaparicio", "Pais.desaparicio", "Es.afusellat", "Data.afusellament", "Periode.afusellament_1", "Periode.afusellament_2", "Provincia.afusellament", "Pais.afusellament", "Localitzat", "Cementiri", "Provincia.localitzat")
+myData <- myData %>% select(all_of(n))
+```
+
+```{r message= FALSE, warning=FALSE}
+# Valors nuls o blancs
+colSums(is.na(myData) | myData=="" | is.null(myData))
+```
+
+# Camp Exèrcit 
+```{r message= FALSE, warning=FALSE}
+# Assignem el nivell "Desconegut" a la variable exercit quan es troba en blanc
+myData$Exercit <- as.character(myData$Exercit)
+myData$Exercit[is.na(myData$Exercit) | myData$Exercit=="" | is.null(myData$Exercit)] <- "DESCONEGUT"
+myData$Exercit <- factor(myData$Exercit)
+summary(myData$Exercit)
+```
+
+
+# Camps data de naixement i any de naixement
+
+```{r message= FALSE, warning=FALSE}
+# Revisem que els períodes de naixement tinguin sentit quan la data de naixement no está informada
+# Períodes amb límit inferior informat i superior no
+indexes_naix_nomes_limit_inf = which((is.na(myData$Data.naixement) | is.null(myData$Data.naixement) | myData$Data.naixement=="") &
+                (!is.na(myData$Periode.naixement_1) & !is.null(myData$Periode.naixement_1) & myData$Periode.naixement_1!="") & 
+                  (is.na(myData$Periode.naixement_2) | is.null(myData$Periode.naixement_2) | myData$Periode.naixement_2==""))
+
+# Períodes amb límit superior informat i inferior no
+indexes_naix_nomes_limit_sup = which((is.na(myData$Data.naixement) | is.null(myData$Data.naixement) | myData$Data.naixement=="") &
+                (!is.na(myData$Periode.naixement_2) & !is.null(myData$Periode.naixement_2) & myData$Periode.naixement_2!="") & 
+                  (is.na(myData$Periode.naixement_1) | is.null(myData$Periode.naixement_1) | myData$Periode.naixement_1==""))
+
+# Períodes amb límit inferior més gran que el superior
+indexes_naix_limits_invertits = which((is.na(myData$Data.naixement) | is.null(myData$Data.naixement) | myData$Data.naixement=="") &
+                                        (!is.na(myData$Periode.naixement_1) & !is.null(myData$Periode.naixement_1) & myData$Periode.naixement_1!="") &
+                                        (!is.na(myData$Periode.naixement_2) & !is.null(myData$Periode.naixement_2) & myData$Periode.naixement_2!="") & 
+                                        myData$Periode.naixement_1 > myData$Periode.naixement_2)
+
+myData[indexes_naix_limits_invertits, c("Id", "Nom.Desaparegut", "Data.naixement", "Periode.naixement_1", "Periode.naixement_2")]
+
+```
+
+```{r message= FALSE, warning=FALSE}
+# Corregim l'únic cas trobat amb límit superior de naixement més petit al límit inferior
+myData[myData$Id==2256, "Periode.naixement_1"] <- 1881
+myData[myData$Id==2256, c("Id", "Nom.Desaparegut", "Data.naixement", "Periode.naixement_1", "Periode.naixement_2")]
+```
+
+```{r message= FALSE, warning=FALSE}
+# Transformem la data de naixement en format date
+myData$Data.naixement <- as.Date(myData$Data.naixement, format = "%d/%m/%Y")
+summary(myData$Data.naixement)
+```
+
+```{r message= FALSE, warning=FALSE}
+# Generem un nou camp any de naixement aprofitant totes les dades possibles
+
+myData$Any.naixement <- ifelse(!is.na(myData$Data.naixement), as.numeric(format(myData$Data.naixement, "%Y")), 
+                               ifelse(!is.na(myData$Periode.naixement_1) & !is.na(myData$Periode.naixement_2), 
+                                      round((myData$Periode.naixement_1 + myData$Periode.naixement_2)/2, digits=0), 
+                                      ifelse(!is.na(myData$Periode.naixement_1), myData$Periode.naixement_1, 0)))
+
+summary(myData$Any.naixement)
+```
+
+
+```{r message= FALSE, warning=FALSE}
+# Anàlisi de l'any de naixement
+statsNaixement <- boxplot(myData[myData$Any.naixement!=0, "Any.naixement"])
+```
+
+```{r message= FALSE, warning=FALSE}
+lowerLimit <- statsNaixement$stats[1]
+lowerLimit
+```
+
+```{r message= FALSE, warning=FALSE}
+upperLimit <- statsNaixement$stats[5]
+upperLimit
+```
+
+
+
+```{r message= FALSE, warning=FALSE}
+outliers <- statsNaixement$out
+outliers
+```
+
+```{r message= FALSE, warning=FALSE}
+myData[myData$Any.naixement==1500, c("Id", "Nom.Desaparegut", "Data.naixement", "Periode.naixement_1", "Periode.naixement_2")]
+myData[myData$Any.naixement==10518, c("Id", "Nom.Desaparegut", "Data.naixement", "Periode.naixement_1", "Periode.naixement_2")]
+```
+
+```{r message= FALSE, warning=FALSE}
+myData[myData$Id==418, "Any.naixement"] <- 1910
+myData[myData$Id==3664, "Any.naixement"] <- 1918
+```
+
+```{r message= FALSE, warning=FALSE}
+boxplot(myData[myData$Any.naixement!=0, "Any.naixement"])
+```
+
+# Camps data de desaparició i any de desaparició
+
+```{r message= FALSE, warning=FALSE}
+# Revisem que els períodes de desaparició tinguin sentit quan la data de desaparició no está informada
+# Períodes amb límit inferior informat i superior no
+indexes_des_nomes_limit_inf = which((is.na(myData$Data.desaparicio) | is.null(myData$Data.desaparicio) | myData$Data.desaparicio=="") &
+                (!is.na(myData$Periode.desaparicio_1) & !is.null(myData$Periode.desaparicio_1) & myData$Periode.desaparicio_1!="") & 
+                  (is.na(myData$Periode.desaparicio_2) | is.null(myData$Periode.desaparicio_2) | myData$Periode.desaparicio_2==""))
+
+# Períodes amb límit superior informat i inferior no
+indexes_des_nomes_limit_sup = which((is.na(myData$Data.desaparicio) | is.null(myData$Data.desaparicio) | myData$Data.desaparicio=="") &
+                (!is.na(myData$Periode.desaparicio_2) & !is.null(myData$Periode.desaparicio_2) & myData$Periode.desaparicio_2!="") & 
+                  (is.na(myData$Periode.desaparicio_1) | is.null(myData$Periode.desaparicio_1) | myData$Periode.desaparicio_1==""))
+
+# Períodes amb límit inferior més gran que el superior
+indexes_des_limits_invertits = which((is.na(myData$Data.desaparicio) | is.null(myData$Data.desaparicio) | myData$Data.desaparicio=="") &
+                                        (!is.na(myData$Periode.desaparicio_1) & !is.null(myData$Periode.desaparicio_1) & myData$Periode.desaparicio_1!="") &
+                                        (!is.na(myData$Periode.desaparicio_2) & !is.null(myData$Periode.desaparicio_2) & myData$Periode.desaparicio_2!="") & 
+                                        myData$Periode.desaparicio_1 > myData$Periode.desaparicio_2)
+
+myData[indexes_des_limits_invertits, c("Id", "Nom.Desaparegut", "Data.desaparicio", "Periode.desaparicio_1", "Periode.desaparicio_2")]
+```
+
+```{r message= FALSE, warning=FALSE}
+# Transformem la data de desaparició en format date
+myData$Data.desaparicio <- as.Date(myData$Data.desaparicio, format = "%d/%m/%Y")
+summary(myData$Data.desaparicio)
+```
+
+```{r message= FALSE, warning=FALSE}
+# Generem un nou camp any de desaparició aprofitant totes les dades possibles
+
+myData$Any.desaparicio <- ifelse(!is.na(myData$Data.desaparicio), as.numeric(format(myData$Data.desaparicio, "%Y")), 
+                               ifelse(!is.na(myData$Periode.desaparicio_1) & !is.na(myData$Periode.desaparicio_2), 
+                                      round((myData$Periode.desaparicio_1 + myData$Periode.desaparicio_2)/2, digits=0), 
+                                      ifelse(!is.na(myData$Periode.desaparicio_1), myData$Periode.desaparicio_1, 
+                                             ifelse(!is.na(myData$Periode.desaparicio_2), myData$Periode.desaparicio_2, 0))))
+
+summary(myData$Any.desaparicio)
+```
+
+
+```{r message= FALSE, warning=FALSE}
+# Anàlisi de l'any de naixement
+statsDesaparicio <- boxplot(myData[myData$Any.desaparicio!=0, "Any.desaparicio"])
+```
+
+```{r message= FALSE, warning=FALSE}
+myData[myData$Any.desaparicio>0 & myData$Any.desaparicio<1936, c("Id", "Nom.Desaparegut", "Data.desaparicio", "Periode.desaparicio_1", "Periode.desaparicio_2", "Any.desaparicio")]
+```
+
+```{r message= FALSE, warning=FALSE}
+# Eliminem les files amb any de desaparició menor a l'inici de la guerra
+myData <- subset(myData, myData$Any.desaparicio==0 | myData$Any.desaparicio>=1936)
+summary(myData$Any.desaparicio)
+```
+
+# Creació camp edat deaparició
+
+```{r message= FALSE, warning=FALSE}
+myData$Edat.desaparicio <- ifelse(myData$Any.naixement>0 & myData$Any.desaparicio>0, myData$Any.desaparicio-myData$Any.naixement,0)
+summary(myData)
+```
+
+
+```{r message= FALSE, warning=FALSE}
+count = table(myData[myData$Edat.desaparicio!=0, "Edat.desaparicio"])
+barplot(prop.table(count),col="cornflowerblue",border="black",
+        main="Edat en el moment de la desaparició",
+        xlab ="Edat", 
+        ylab = "Percentatge sobre la quantitat total de persones")
+```
+
+
+# Províncies i països
+
+```{r message= FALSE, warning=FALSE}
+myData$Provincia.naixement <- as.factor(myData$Provincia.naixement)
+levels(myData$Provincia.naixement)
+```
+
+```{r message= FALSE, warning=FALSE}
+myData$Provincia.desaparicio <- as.factor(myData$Provincia.desaparicio)
+levels(myData$Provincia.desaparicio)
+```
+
+```{r message= FALSE, warning=FALSE}
+myData <- myData %>% rename(
+  'Pais.naixement' = 'Pais.estranger.naixement'
+)
+```
+
+```{r message= FALSE, warning=FALSE}
+library(stringr)
+myData$Pais.naixement <- ifelse(!is.na(myData$Provincia.naixement) & !is.null(myData$Provincia.naixement) & myData$Provincia.naixement!="", "Espanya",
+                                str_to_title(tolower(myData$Pais.naixement)))
+```
+
+```{r message= FALSE, warning=FALSE}
+myData[myData$Pais.naixement=="", "Pais.naixement"] <- "Desconegut"
+myData$Pais.naixement <- as.factor(myData$Pais.naixement)
+levels(myData$Pais.naixement)
+```
+
+```{r message= FALSE, warning=FALSE}
+count = table(myData$Pais.naixement)
+barplot(prop.table(count),col="cornflowerblue",border="black",
+        main="País naixement",
+        xlab ="País", 
+        ylab = "Percentatge sobre la quantitat total de persones", las=2)
+```
+
+
+```{r message= FALSE, warning=FALSE}
+myData[myData$Id==1693, "Pais.desaparicio"] <- "Espanya"
+myData[myData$Pais.desaparicio=="", "Pais.desaparicio"] <- "Desconegut"
+myData$Pais.desaparicio <- as.factor(myData$Pais.desaparicio)
+levels(myData$Pais.desaparicio)
+```
+
+```{r message= FALSE, warning=FALSE}
+count = table(myData$Pais.desaparicio)
+barplot(prop.table(count),col="cornflowerblue",border="black",
+        main="País desaparició",
+        xlab ="País", 
+        ylab = "Percentatge sobre la quantitat total de persones", las=2)
+```
+
+
+# Exportació
+
+```{r message= FALSE, warning=FALSE}
+write.csv(myData, "Cens_de_persones_desaparegudes_durant_la_Guerra_Civil_clean.csv", row.names=FALSE, na="")
+```
