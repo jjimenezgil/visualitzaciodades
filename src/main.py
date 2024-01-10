@@ -24,5 +24,5 @@ choice = ['Mapa de les províncies de naixement de les persones desaparegudes',
 choice_selected = st.selectbox("Selecciona el mapa", choice, index=2)
 
 # Create map
-m = folium.Map(location=[40.41, -3.7], tiles='CartoDB positron', zoom_start=5)
+m = folium.Map(location=[40.41, -3.7], tiles='CartoDB positron', zoom_start=7)
 folium_static(m, width=1600, height=950)
