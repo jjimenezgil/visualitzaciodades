@@ -37,6 +37,13 @@ choice_selected = st.selectbox("Selecciona el mapa", choice, index=2)
 m = folium.Map(location=[40.41, -3.7], tiles='CartoDB positron', zoom_start=6)
 
 # Append Choropleth colors to map
+tooltip = folium.GeoJsonTooltip(
+    fields=["nom_cat", "count"],
+    aliases=["Província:", "Nombre de desapareguts:"],
+    localize=True,
+    sticky=False,
+    labels=True
+)
 folium.Choropleth(
     geo_data=df_naixement,
     name="choropleth",
@@ -46,17 +53,12 @@ folium.Choropleth(
     fill_color="YlGn",
     fill_opacity=0.7,
     line_opacity=0.1,
-    legend_name=choice_selected).add_to(m)
+    legend_name=choice_selected,
+    tooltip=tooltip).add_to(m)
 
 # Append geoJSON province limits to the map
-tooltip = folium.GeoJsonTooltip(
-    fields=["nom_cat", "count"],
-    aliases=["Província:", "Nombre de desapareguts:"],
-    localize=True,
-    sticky=False,
-    labels=True
-)
-folium.GeoJson(df_naixement, name="Provinces map", tooltip=tooltip).add_to(m)
+
+#folium.GeoJson(df_naixement, name="Provinces map", tooltip=tooltip).add_to(m)
 folium.LayerControl().add_to(m)
 
 # Show map
