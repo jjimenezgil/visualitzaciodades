@@ -50,7 +50,7 @@ folium.Choropleth(
     data=df_naixement,
     columns= ["cod_prov","count"],
     key_on="feature.properties.cod_prov",
-    fill_color="YlGn",
+    fill_color="YlOrRd",
     fill_opacity=0.7,
     line_opacity=0.1,
     legend_name=choice_selected,
