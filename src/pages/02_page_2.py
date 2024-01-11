@@ -7,7 +7,12 @@ import geopandas
 
 
 # Config page
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide",
+                   page_title="Dades geogràfiques",
+                   page_icon="globe showing europe africa")
+
+# Title
+st.markdown("# Dades geogràfiques")
 
 # Load data
 desapareguts = pd.read_csv("data/Cens_de_persones_desaparegudes_durant_la_Guerra_Civil_clean.csv")
