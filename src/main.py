@@ -57,5 +57,5 @@ folium.GeoJson(df_naixement, name="Provinces map", tooltip=tooltip).add_to(m)
 folium.LayerControl().add_to(m)
 
 # Show map
-folium_static(m, width=1600, height=950)
+folium_static(m, width=1400, height=750)
 st.dataframe(data=pd.DataFrame(df_naixement))
