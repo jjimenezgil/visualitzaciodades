@@ -17,8 +17,9 @@ st.set_page_config(layout="wide",
 
 ### Persones desaparegudes a Espanya
 
-Al Cens de persones desaparegudes durant la Guerra Civil trobem molta informació sobre on van
-desapareixer
+Al Cens de persones desaparegudes durant la Guerra Civil hi figura molta informació geogràfica: on
+van neixer les persones desaparegudes, on era la seva residència habitual, on van desapareixer, on
+van ser localitzats... Explorem tota aquesta informació, organitzada per províncies, al següent mapa.
 '''
 
 # Load data
