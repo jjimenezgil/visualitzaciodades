@@ -93,9 +93,21 @@ folium_static(m, width=1000, height=600)
 df_paisos = desapareguts.groupby(["Pais.desaparicio"])["Pais.desaparicio"].count().reset_index(name="count")
 df_paisos = df_paisos.merge(paisos, how="outer", left_on="Pais.desaparicio", right_on="nom_cat")
 geo_df_paisos = geodf_countries.merge(df_paisos, how="inner", left_on="name_es", right_on="name_es")
+# Remove Spain
+geo_df_paisos = geo_df_paisos.loc[geo_df_paisos["name_es"] != "España"]
 
 # Country map
 m2 = folium.Map(location=[50.37, 15], tiles='CartoDB positron', zoom_start=2)
+folium.Choropleth(
+    geo_data=geo_df_paisos,
+    name="choropleth",
+    data=geo_df_paisos,
+    columns= ["name_es", "count"],
+    key_on="feature.properties.name_es",
+    fill_color="YlOrRd",
+    fill_opacity=0.7,
+    line_opacity=0.1,
+    legend_name="Nombre de desapareguts a l'estranger").add_to(m2)
 tooltip2 = folium.GeoJsonTooltip(
     fields=["nom_cat", "count"],
     aliases=["País:", "Nombre de desapareguts:"],
