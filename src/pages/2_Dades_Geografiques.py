@@ -46,8 +46,7 @@ folium.Choropleth(
     fill_color="YlOrRd",
     fill_opacity=0.7,
     line_opacity=0.1,
-    legend_name=choice_selected,
-    tooltip=tooltip).add_to(m)
+    legend_name=choice_selected).add_to(m)
 
 # Append geoJSON province limits to the map
 tooltip = folium.GeoJsonTooltip(
