@@ -8,8 +8,7 @@ import geopandas
 
 # Config page
 st.set_page_config(layout="wide",
-                   page_title="Dades geogràfiques",
-                   page_icon="globe showing europe africa")
+                   page_title="Dades geogràfiques")
 
 # Title
 st.markdown("# Dades geogràfiques")
