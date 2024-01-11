@@ -30,7 +30,7 @@ choice = ['Mapa de les províncies de naixement de les persones desaparegudes',
 choice_selected = st.selectbox("Selecciona el mapa", choice, index=2)
 
 # Create map
-m = folium.Map(location=[40.41, -3.7], tiles='CartoDB positron', zoom_start=7)
+m = folium.Map(location=[40.41, -3.7], tiles='CartoDB positron', zoom_start=6)
 
 # Append geoJSON province limits to the map
 tooltip = folium.GeoJsonTooltip(
@@ -57,5 +57,5 @@ folium.GeoJson(df_naixement, name="Provinces map", tooltip=tooltip).add_to(m)
 folium.LayerControl().add_to(m)
 
 # Show map
-folium_static(m, width=1400, height=750)
+folium_static(m, width=1200, height=650)
 st.dataframe(data=pd.DataFrame(df_naixement))
