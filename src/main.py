@@ -58,4 +58,4 @@ folium.LayerControl().add_to(m)
 
 # Show map
 folium_static(m, width=1200, height=650)
-st.dataframe(data=pd.DataFrame(df_naixement))
+df_naixement.columns
