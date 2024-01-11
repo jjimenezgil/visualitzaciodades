@@ -9,8 +9,8 @@ import geopandas
 # Config page
 st.set_page_config(layout="wide",
                    page_title="Dades geogràfiques",
-                   page_icon="🌍")
-
+                   page_icon=":compression:")
+#🌍
 # Title
 st.markdown("# Dades geogràfiques")
 
