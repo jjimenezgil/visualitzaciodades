@@ -48,11 +48,11 @@ choice_selected = st.selectbox("Selecciona el mapa", choice, index=2)
 countToShow = "countDesaparicio"
 if choice_selected == choice[0]:
   countToShow = "countNaixement"
-else if choice_selected == choice[1]:
+elif choice_selected == choice[1]:
   countToShow = "countHabitual"
-else if choice_selected == choice[2]:
+elif choice_selected == choice[2]:
   countToShow = "countDesaparicio"
-else if choice_selected == choice[3]:
+elif choice_selected == choice[3]:
   countToShow = "countAfusellament"
 else:
   countToShow = "countLocalitzacio"
