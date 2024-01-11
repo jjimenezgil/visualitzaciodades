@@ -108,6 +108,12 @@ Tot i que la major part de l'informació que trobem als mapes era d'esperar, en 
 * Barcelona és la ciutat més destacada als diferents mapes (és el lloc on van neixer i viure més persones del registre de desapareguts, i 
 també on més persones van ser afusellades i on més persones han sigut localitzades), però sorpren el fet que, si observem
 el mapa de les províncies on es van produir les desaparicions, Barcelona es veu àmpliament superada per Tarragona i LLeida.
+* A Terol també trobem un nom sorprenentment alt de desapareguts (235), només superat per algunes de les províncies catalanes.
+
+### Persones desaparegudes a l'estranger
+
+Al següent mapa es mostren el nombre de persones registrades al Cens de persones desaparegudes durant la Guerra Civil que van desapareixer
+a països estrangers.
 '''
 
 # Count and joins per country
@@ -138,3 +144,9 @@ tooltip2 = folium.GeoJsonTooltip(
 )
 folium.GeoJson(geo_df_paisos, name="Countries map", tooltip=tooltip2).add_to(m2)
 folium_static(m2, width=1000, height=600)
+
+'''
+En aquest cas, és coherent que la major part de desaparicions a l'estranger s'enregistressin a França, el país on es va exiliar
+una gran part de la població espanyola. Les desaparicions a altres països com ara Rússia o Alemanya són pràcticament testimonials,
+al menys amb la informació de que disposem en aquest cens.
+'''
