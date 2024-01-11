@@ -96,5 +96,12 @@ geo_df_paisos = geodf_countries.merge(df_paisos, how="inner", left_on="name_es",
 
 # Country map
 m2 = folium.Map(location=[50.37, 15], tiles='CartoDB positron', zoom_start=2)
-folium.GeoJson(geo_df_paisos, name="Countries map").add_to(m2)
+tooltip2 = folium.GeoJsonTooltip(
+    fields=["nom_cat", "count"],
+    aliases=["País:", "Nombre de desapareguts:"],
+    localize=True,
+    sticky=False,
+    labels=True
+)
+folium.GeoJson(geo_df_paisos, name="Countries map", tooltip=tooltip2).add_to(m2)
 folium_static(m2, width=1000, height=600)
