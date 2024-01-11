@@ -11,8 +11,15 @@ st.set_page_config(layout="wide",
                    page_title="Dades geogràfiques",
                    page_icon="🌍")
 
-# Title
-st.markdown("# Dades geogràfiques")
+# Text
+'''
+# Dades geogràfiques
+
+### Persones desaparegudes a Espanya
+
+Al Cens de persones desaparegudes durant la Guerra Civil trobem molta informació sobre on van
+desapareixer
+'''
 
 # Load data
 desapareguts = pd.read_csv("data/Cens_de_persones_desaparegudes_durant_la_Guerra_Civil_clean.csv")
