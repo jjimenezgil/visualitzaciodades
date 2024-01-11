@@ -97,6 +97,19 @@ folium.GeoJson(geo_df_final, name="Provinces map", tooltip=tooltip).add_to(m)
 # Show map
 folium_static(m, width=1000, height=600)
 
+# Text
+'''
+En tractar-se d'un registre de dades de la Generalitat de Catalunya, no sorpren descubrir als mapes que la majoria de persones desaparegudes
+eren nascudes o habitants de Catalunya, o bé van desapareixer a Catalunya (o totes les anteriors a la vegada). El fet que Barcelona fos una de
+les últimes ciutats del bandol republicà en caure sota el control dels nacionals també pot estar relacionat amb l'elevat nombre de persones
+desaparegudes a l'esmentada ciutat. També a Catalunya (i especialment Barcelona) és on hi ha un major nombre de cossos localitzats i recuperats.
+Tot i que la major part de l'informació que trobem als mapes era d'esperar, en podem destacar un parell de fets:
+
+* Barcelona és la ciutat més destacada als diferents mapes (és el lloc on van neixer i viure més persones del registre de desapareguts, i 
+també on més persones van ser afusellades i on més persones han sigut localitzades), però sorpren el fet que, si observem
+el mapa de les províncies on es van produir les desaparicions, Barcelona es veu àmpliament superada per Tarragona i LLeida.
+'''
+
 # Count and joins per country
 df_paisos = desapareguts.groupby(["Pais.desaparicio"])["Pais.desaparicio"].count().reset_index(name="count")
 df_paisos = df_paisos.merge(paisos, how="outer", left_on="Pais.desaparicio", right_on="nom_cat")
