@@ -52,7 +52,7 @@ folium.Choropleth(
     fill_color="YlGn",
     fill_opacity=0.7,
     line_opacity=0.2,
-    legend_name=choice).add_to(m)
+    legend_name=choice_selected).add_to(m)
 
 folium.LayerControl().add_to(m)
 
