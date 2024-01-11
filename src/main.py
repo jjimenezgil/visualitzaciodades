@@ -43,19 +43,18 @@ tooltip = folium.GeoJsonTooltip(
 folium.GeoJson(df_naixement, name="Provinces map", tooltip=tooltip).add_to(m)
 
 # Append Choropleth colors to map
-"""folium.Choropleth(
+folium.Choropleth(
     geo_data=df_naixement,
     name="choropleth",
     data=df_naixement,
-    columns= ["GEOID","Total_Pop_2021"],
-    key_on="feature.properties.GEOID",
+    columns= ["cod_prov","count"],
+    key_on="feature.properties.cod_prov",
     fill_color="YlGn",
     fill_opacity=0.7,
     line_opacity=0.2,
-    legend_name=choice).add_to(m)"""
+    legend_name=choice).add_to(m)
 
 folium.LayerControl().add_to(m)
 
 # Show map
 folium_static(m, width=1200, height=650)
-df_naixement.columns
