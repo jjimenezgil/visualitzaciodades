@@ -8,7 +8,8 @@ import geopandas
 
 # Config page
 st.set_page_config(layout="wide",
-                   page_title="Dades geogràfiques")
+                   page_title="Dades geogràfiques",
+                   page_icon="🌍")
 
 # Title
 st.markdown("# Dades geogràfiques")
@@ -20,28 +21,51 @@ with open("data/spain-provinces.geojson") as f:
     geojson_data = json.load(f)
 geodf = geopandas.GeoDataFrame.from_features(geojson_data, crs="EPSG:4326")
 
-# Join data with provinces information
-df_naixement = desapareguts.groupby(["Provincia.naixement"])["Provincia.naixement"].count().reset_index(name="count")
-df_naixement = df_naixement.merge(provincies, how="left", left_on="Provincia.naixement", right_on="nom_cat")
-df_naixement = geodf.merge(df_naixement, how="left", left_on="name", right_on="nom_GeoJSON")
+# Counts per province
+df_naixement = desapareguts.groupby(["Provincia.naixement"])["Provincia.naixement"].count().reset_index(name="countNaixement")
+df_habitual = desapareguts.groupby(["Provincia.habitual"])["Provincia.habitual"].count().reset_index(name="countHabitual")
+df_desaparicio = desapareguts.groupby(["Provincia.desaparicio"])["Provincia.desaparicio"].count().reset_index(name="countDesaparicio")
+df_afusellament = desapareguts.groupby(["Provincia.afusellament"])["Provincia.afusellament"].count().reset_index(name="countAfusellament")
+df_localització = desapareguts.groupby(["Provincia.localitzat"])["Provincia.localitzat"].count().reset_index(name="countLocalitzacio")
+
+# Join to get full information in a single geodf
+df_final = provincies.merge(df_naixement, how="outer", left_on="nom_cat", right_on="Provincia.naixement")
+df_final = df_final.merge(df_habitual, how="outer", left_on="nom_cat", right_on="Provincia.habitual")
+df_final = df_final.merge(df_desaparicio, how="outer", left_on="nom_cat", right_on="Provincia.desaparicio")
+df_final = df_final.merge(df_afusellament, how="outer", left_on="nom_cat", right_on="Provincia.afusellament")
+df_final = df_final.merge(df_localització, how="outer", left_on="nom_cat", right_on="Provincia.localitzat")
+df_final.drop(labels=["Provincia.naixement","Provincia.habitual","Provincia.desaparicio","Provincia.afusellament","Provincia.localitzat"], axis=1, inplace=True)
+geo_df_final = geodf.merge(df_final, how="outer", left_on="name", right_on="nom_GeoJSON")
 
 # Create select box for the different maps
 choice = ['Mapa de les províncies de naixement de les persones desaparegudes',
           'Mapa de les províncies habituals de les persones desaparegudes', 
           'Mapa de les províncies on es van produir les desaparicions', 
           'Mapa de les províncies on es van produir els afusellaments',
-          'Mapa de les províncies on es van localitzar els cosos de les persones desaparegudes']
+          'Mapa de les províncies on es van localitzar els cossos de les persones desaparegudes']
 choice_selected = st.selectbox("Selecciona el mapa", choice, index=2)
 
+countToShow = "countDesaparicio"
+if choice_selected == choice[0]:
+  countToShow = "countNaixement"
+else if choice_selected == choice[1]:
+  countToShow = "countHabitual"
+else if choice_selected == choice[2]:
+  countToShow = "countDesaparicio"
+else if choice_selected == choice[3]:
+  countToShow = "countAfusellament"
+else:
+  countToShow = "countLocalitzacio"
+  
 # Create map
 m = folium.Map(location=[40.41, -3.7], tiles='CartoDB positron', zoom_start=6)
 
 # Append Choropleth colors to map
 folium.Choropleth(
-    geo_data=df_naixement,
+    geo_data=geo_df_final,
     name="choropleth",
-    data=df_naixement,
-    columns= ["cod_prov","count"],
+    data=geo_df_final,
+    columns= ["cod_prov", countToShow],
     key_on="feature.properties.cod_prov",
     fill_color="YlOrRd",
     fill_opacity=0.7,
@@ -50,14 +74,13 @@ folium.Choropleth(
 
 # Append geoJSON province limits to the map
 tooltip = folium.GeoJsonTooltip(
-    fields=["nom_cat", "count"],
+    fields=["nom_cat", countToShow],
     aliases=["Província:", "Nombre de desapareguts:"],
     localize=True,
     sticky=False,
     labels=True
 )
-folium.GeoJson(df_naixement, name="Provinces map", tooltip=tooltip).add_to(m)
-#folium.LayerControl().add_to(m)
+folium.GeoJson(geo_df_final, name="Provinces map", tooltip=tooltip).add_to(m)
 
 # Show map
 folium_static(m, width=1000, height=600)
