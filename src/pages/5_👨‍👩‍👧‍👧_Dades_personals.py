@@ -33,6 +33,7 @@ ax2[0].hist(desapareguts_homes_edat["Edat.desaparicio"], bins=50)
 ax2[0].set_title("Edat homes")
 ax2[1].hist(desapareguts_dones_edat["Edat.desaparicio"], bins=50, color="orange")
 ax2[1].set_title("Edat dones")
+st.pyplot(fig2)
 
 # Boxplot
 
