@@ -4,6 +4,15 @@ import streamlit as st
 import matplotlib.pyplot as plt
 
 
+# Config page
+st.set_page_config(page_title="Dades personals",
+                   page_icon="👨‍👩‍👧‍👧")
+
+# Text
+'''
+# Dades geogràfiques
+'''
+
 desapareguts = pd.read_csv("data/Cens_de_persones_desaparegudes_durant_la_Guerra_Civil_clean.csv")
 desapareguts_homes = desapareguts.loc[desapareguts["Sexe"]=="Home"]
 desapareguts_homes_professio = desapareguts_homes.loc[desapareguts["Professio"].notna()]
