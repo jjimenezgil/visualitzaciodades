@@ -15,8 +15,6 @@ st.set_page_config(page_title="Dades personals",
 
 # Load data
 desapareguts = pd.read_csv("data/Cens_de_persones_desaparegudes_durant_la_Guerra_Civil_clean.csv")
-desapareguts_homes = desapareguts.loc[desapareguts["Sexe"]=="Home"]
-desapareguts_homes_professio = desapareguts_homes.loc[desapareguts["Professio"].notna()]
 
 # Histogram per sex
 counts = desapareguts.groupby(["Sexe"])["Sexe"].count()
@@ -26,12 +24,24 @@ fig1, ax1 = plt.subplots()
 ax1.bar(x, y, align='center')
 st.pyplot(fig1)
 
+# Age comparison
+desapareguts_edat = desapareguts.loc[desapareguts["Edat.desaparicio"]!=0]
+desapareguts_homes_edat = desapareguts_edat.loc[desapareguts_edat["Sexe"]=="Home"]
+desapareguts_dones_edat = desapareguts_edat.loc[desapareguts_edat["Sexe"]=="Dona"]
+fig2, ax2 = plt.subplots(1, 2, figsize=(12,5))
+ax2[0].hist(desapareguts_homes_edat["Edat.desaparicio"], bins=50)
+ax2[0].set_title("Edat homes")
+ax2[1].hist(desapareguts_dones_edat["Edat.desaparicio"], bins=50, color="orange")
+ax2[1].set_title("Edat dones")
 
+# Boxplot
 
+# Wordcloud
+desapareguts_homes = desapareguts.loc[desapareguts["Sexe"]=="Home"]
+desapareguts_homes_professio = desapareguts_homes.loc[desapareguts["Professio"].notna()]
 professions = desapareguts_homes_professio["Professio"].tolist()
 professions = list(map(lambda x: x.split(" ")[0].strip(), professions))
 text = ' '.join(professions)
-
 
 wordcloud = WordCloud(width = 700,
                       height = 300,
