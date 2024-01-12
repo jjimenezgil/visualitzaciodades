@@ -41,20 +41,38 @@ fig3, ax3 = plt.subplots()
 sns.boxplot(x=desapareguts_edat["Sexe"], y=desapareguts_edat["Edat.desaparicio"], ax=ax3)
 st.pyplot(fig3)
 
-# Wordcloud
-desapareguts_homes = desapareguts.loc[desapareguts["Sexe"]=="Home"]
-desapareguts_homes_professio = desapareguts_homes.loc[desapareguts["Professio"].notna()]
-professions = desapareguts_homes_professio["Professio"].tolist()
-professions = list(map(lambda x: x.split(" ")[0].strip(), professions))
-text = ' '.join(professions)
+# Wordcloud Homes
+desapareguts_professio = desapareguts.loc[desapareguts["Professio"].notna()]
+desapareguts_homes_professio = desapareguts_professio.loc[desapareguts["Sexe"]=="Home"]
 
-wordcloud = WordCloud(width = 700,
+professions_home = desapareguts_homes_professio["Professio"].tolist()
+professions_home = list(map(lambda x: x.split(" ")[0].strip(), professions_home))
+text_home = ' '.join(professions_home)
+
+wordcloud_home = WordCloud(width = 700,
                       height = 300,
                       collocations=False,
-                      max_words=500).generate(text)
+                      max_words=500).generate(text_home)
 
 # Display the generated image:
-fig, ax = plt.subplots()
-ax.imshow(wordcloud, interpolation='bilinear')
-ax.axis("off")
-st.pyplot(fig)
+fig4, ax4 = plt.subplots()
+ax4.imshow(wordcloud_home, interpolation='bilinear')
+ax4.axis("off")
+st.pyplot(fig4)
+
+# Wordcloud Dones
+desapareguts_dones_professio = desapareguts_professio.loc[desapareguts["Sexe"]=="Dona"]
+professions_dona = desapareguts_dones_professio["Professio"].tolist()
+professions_dona = list(map(lambda x: x.split(" ")[0].strip(), professions_dona))
+text_dona = ' '.join(professions_dona)
+
+wordcloud_dona = WordCloud(width = 700, 
+                           height = 300,
+                           collocations=False,
+                           max_words=500).generate(text_dona)
+
+# Display the generated image:
+fig5, ax5 = plt.subplots()
+ax5.imshow(wordcloud_dona, interpolation='bilinear')
+ax5.axis("off")
+st.pyplot(fig5)
