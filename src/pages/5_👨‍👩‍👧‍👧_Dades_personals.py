@@ -2,6 +2,7 @@ from wordcloud import WordCloud
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 # Config page
@@ -36,6 +37,9 @@ ax2[1].set_title("Edat dones")
 st.pyplot(fig2)
 
 # Boxplot
+fig3, ax3 = plt.subplots()
+sns.boxplot(x=desapareguts_edat["Sexe"], y=desapareguts_edat["Edat.desaparicio"], ax=ax3)
+st.pyplot(fig3)
 
 # Wordcloud
 desapareguts_homes = desapareguts.loc[desapareguts["Sexe"]=="Home"]
