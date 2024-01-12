@@ -29,3 +29,4 @@ wordcloud = WordCloud(width = 700,
 plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis("off")
 plt.show()
+st.pyplot()
