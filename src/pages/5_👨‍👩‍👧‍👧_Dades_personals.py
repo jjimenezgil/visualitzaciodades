@@ -26,7 +26,9 @@ wordcloud = WordCloud(width = 700,
                       height = 300,
                       collocations=False,
                       max_words=500).generate(text)
-plt.imshow(wordcloud, interpolation='bilinear')
+
+# Display the generated image:
+fig, ax = plt.subplots()
+ax.imshow(wordcloud, interpolation='bilinear')
 plt.axis("off")
-plt.show()
-st.pyplot()
+st.pyplot(fig)
