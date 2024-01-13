@@ -17,13 +17,16 @@ st.set_page_config(page_title="Dades personals",
 # Load data
 desapareguts = pd.read_csv("data/Cens_de_persones_desaparegudes_durant_la_Guerra_Civil_clean.csv")
 
-# Histogram per sex
+# Barplot per sex
 counts = desapareguts.groupby(["Sexe"])["Sexe"].count()
 y = [counts["Home"], counts["Dona"]]
 x = ["Home", "Dona"]
 fig1, ax1 = plt.subplots()
 ax1.bar(x, y, align='center')
 st.pyplot(fig1)
+
+# Test barplot
+st.bar_chart(x=x,y=y)
 
 # Age comparison
 desapareguts_edat = desapareguts.loc[desapareguts["Edat.desaparicio"]!=0]
@@ -35,11 +38,6 @@ ax2[0].set_title("Edat homes")
 ax2[1].hist(desapareguts_dones_edat["Edat.desaparicio"], bins=50, color="orange")
 ax2[1].set_title("Edat dones")
 st.pyplot(fig2)
-
-# Test hist
-st.hist(desapareguts_homes_edat["Edat.desaparicio"], bins=50, color='skyblue', edgecolor='black')
-st.title('Interactive Histogram with Streamlit')
-st.show()
 
 # Boxplot
 fig3, ax3 = plt.subplots()
