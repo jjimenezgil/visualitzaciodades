@@ -24,7 +24,7 @@ y = [counts["Home"], counts["Dona"]]
 x = ["Home", "Dona"]
 fig1, ax1 = plt.subplots()
 ax1.bar(x, y, align='center')
-st.pyplot(fig1)
+st.pyplot(fig1, use_container_width=False)
 
 # Age comparison
 desapareguts_edat = desapareguts.loc[desapareguts["Edat.desaparicio"]!=0]
