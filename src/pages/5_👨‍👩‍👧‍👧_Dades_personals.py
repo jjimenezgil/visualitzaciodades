@@ -10,15 +10,7 @@ st.set_page_config(layout="wide",
                    page_title="Dades personals",
                    page_icon="👨‍👩‍👧‍👧")
 
-# Text
-'''
-# Dades personals
-
-## Gènere
-Com es d'esperar d'una guerra del segle passat, una gran part dels participants eren homes, i així es veu reflectit al cens de persones
-desaparegudes. Visualitzem-ho al següent gràfic de barres.
-'''
-
+# Define font-size
 st.markdown("""
 <style>
 .big-font {
@@ -27,7 +19,16 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<p class="big-font">Hello World !!</p>', unsafe_allow_html=True)
+# Text
+'''
+# Dades personals
+
+## Gènere
+'''
+st.markdown("""<p class="big-font">
+Com es d'esperar d'una guerra del segle passat, una gran part dels participants eren homes, i així es veu reflectit al cens de persones
+desaparegudes. Visualitzem-ho al següent gràfic de barres.
+</p>""", unsafe_allow_html=True)
 
 # Load data
 desapareguts = pd.read_csv("data/Cens_de_persones_desaparegudes_durant_la_Guerra_Civil_clean.csv")
@@ -42,10 +43,10 @@ ax1.bar(x, y, align='center', color=color)
 st.pyplot(fig1, use_container_width=False)
 
 # Text
-'''
+st.markdown("""<p class="big-font">
 De manera més concreta, trobem registres de 5177 homes desapareguts, però només 129 corresponents a dones. Representen menys d'un 3% de les
 nostres dades!
-'''
+</p>""", unsafe_allow_html=True)
 
 st.divider()
 
