@@ -35,7 +35,11 @@ st.pyplot(fig1, use_container_width=False)
 '''
 De manera més concreta, trobem registres de 5177 homes desapareguts, però només 129 corresponents a dones. Representen menys d'un 3% de les
 nostres dades!
+'''
 
+st.divider()
+
+'''
 ## Edats
 
 '''
