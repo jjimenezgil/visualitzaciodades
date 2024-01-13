@@ -14,7 +14,7 @@ st.set_page_config(layout="wide",
 st.markdown("""
 <style>
 .big-font {
-    font-size:18px !important;
+    font-size:19px !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -52,8 +52,12 @@ st.divider()
 
 '''
 ## Edats
-
 '''
+# Text
+st.markdown("""<p class="big-font">
+Visualitzem mitjançant histogrames la distribució per edats dels desapareguts del cens (tenint en compte només les persones que tenien aquesta 
+informació emmagatzemada), separant per gènere per veure si trobem diferències significatives.
+</p>""", unsafe_allow_html=True)
 
 # Age comparison
 desapareguts_edat = desapareguts.loc[desapareguts["Edat.desaparicio"]!=0]
