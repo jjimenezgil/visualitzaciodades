@@ -6,7 +6,8 @@ import seaborn as sns
 
 
 # Config page
-st.set_page_config(page_title="Dades personals",
+st.set_page_config(layout="wide",
+                   page_title="Dades personals",
                    page_icon="👨‍👩‍👧‍👧")
 
 # Text
