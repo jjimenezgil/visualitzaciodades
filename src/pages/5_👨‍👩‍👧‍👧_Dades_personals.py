@@ -19,6 +19,16 @@ Com es d'esperar d'una guerra del segle passat, una gran part dels participants 
 desaparegudes. Visualitzem-ho al següent gràfic de barres.
 '''
 
+st.markdown("""
+<style>
+.big-font {
+    font-size:18px !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
+st.markdown('<p class="big-font">Hello World !!</p>', unsafe_allow_html=True)
+
 # Load data
 desapareguts = pd.read_csv("data/Cens_de_persones_desaparegudes_durant_la_Guerra_Civil_clean.csv")
 
