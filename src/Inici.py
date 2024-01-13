@@ -32,3 +32,8 @@ plantejades!
 
 desapareguts = pd.read_csv("data/Cens_de_persones_desaparegudes_durant_la_Guerra_Civil_clean.csv")
 st.dataframe(data=desapareguts)
+
+'''
+Al meu [repositori de Github](https://github.com/jjimenezgil/visualitzaciodadesPRA) podeu trobar el codi del projecte amb llicència de
+codi obert. Adreçeu-vos al fitxer README.txt per conèixer els detalls i l'estructura del projecte.
+'''
