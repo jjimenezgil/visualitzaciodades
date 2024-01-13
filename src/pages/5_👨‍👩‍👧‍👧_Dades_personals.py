@@ -39,7 +39,7 @@ st.pyplot(fig2, use_container_width=False)
 
 # Boxplot
 fig3, ax3 = plt.subplots(figsize=(6,3))
-my_pal = {"Home": "b", "Dona": "g"}
+my_pal = {"Home": "#1F77B4", "Dona": "#FFA500"}
 sns.boxplot(x=desapareguts_edat["Sexe"], y=desapareguts_edat["Edat.desaparicio"], ax=ax3, palette=my_pal)
 ax3.set(xlabel='Sexe', ylabel='Edat desaparició')
 st.pyplot(fig3, use_container_width=False)
