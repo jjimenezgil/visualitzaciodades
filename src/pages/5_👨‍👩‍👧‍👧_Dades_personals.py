@@ -22,7 +22,7 @@ desapareguts = pd.read_csv("data/Cens_de_persones_desaparegudes_durant_la_Guerra
 counts = desapareguts.groupby(["Sexe"])["Sexe"].count()
 y = [counts["Home"], counts["Dona"]]
 x = ["Home", "Dona"]
-fig1, ax1 = plt.subplots(figsize=(12,5))
+fig1, ax1 = plt.subplots(figsize=(18,5))
 ax1.bar(x, y, align='center')
 st.pyplot(fig1, use_container_width=False)
 
