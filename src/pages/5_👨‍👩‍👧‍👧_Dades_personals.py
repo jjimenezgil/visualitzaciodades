@@ -23,7 +23,8 @@ counts = desapareguts.groupby(["Sexe"])["Sexe"].count()
 y = [counts["Home"], counts["Dona"]]
 x = ["Home", "Dona"]
 fig1, ax1 = plt.subplots(figsize=(6,3))
-ax1.bar(x, y, align='center')
+color = ['#1F77B4', '#FFA500']
+ax1.bar(x, y, align='center', color=color)
 st.pyplot(fig1, use_container_width=False)
 
 # Age comparison
