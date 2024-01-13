@@ -40,6 +40,7 @@ st.pyplot(fig2, use_container_width=False)
 # Boxplot
 fig3, ax3 = plt.subplots()
 sns.boxplot(x=desapareguts_edat["Sexe"], y=desapareguts_edat["Edat.desaparicio"], ax=ax3)
+ax3.set(xlabel='Sexe', ylabel='Edat desaparició')
 st.pyplot(fig3)
 
 # Wordcloud Homes
