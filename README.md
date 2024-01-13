@@ -2,9 +2,9 @@
 
 ## En que consisteix la PRA de l'assignatura de Visualització de Dades?
 Per a la PRA final de l'assignatura s'han utilitzat les dades del "Cens de persones desaparegudes durant la Guerra Civil", 
-disponibles al Portal de dades obertes de la Generalitat de Catalunya. S'ha utilitzat Streamlit (programat en Python) per
-generar una sèrie de visualitzacions sobre aquestes dades i intentar respondre algunes preguntes que ens haviem plantejat
-prèviament. El projecte consta de l'estructura següent:
+disponibles al Portal de dades obertes de la Generalitat de Catalunya (https://analisi.transparenciacatalunya.cat/Legislaci-just-cia/Cens-de-persones-desaparegudes-durant-la-Guerra-Ci/u2ix-2jr6/about_data). 
+S'ha utilitzat Streamlit (programat en Python) per generar una sèrie de visualitzacions sobre aquestes dades i intentar 
+respondre algunes preguntes que ens haviem plantejat prèviament. El projecte consta de l'estructura següent:
 
 * visualitzaciodadesPRA (repository): arrel del projecte.
   * data (folder): on es guarden les dades que nutreixen les visualitzacions del projecte.
