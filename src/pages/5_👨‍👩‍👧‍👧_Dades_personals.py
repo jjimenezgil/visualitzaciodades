@@ -30,7 +30,7 @@ st.pyplot(fig1, use_container_width=False)
 desapareguts_edat = desapareguts.loc[desapareguts["Edat.desaparicio"]!=0]
 desapareguts_homes_edat = desapareguts_edat.loc[desapareguts_edat["Sexe"]=="Home"]
 desapareguts_dones_edat = desapareguts_edat.loc[desapareguts_edat["Sexe"]=="Dona"]
-fig2, ax2 = plt.subplots(1, 2, figsize=(7,3))
+fig2, ax2 = plt.subplots(1, 2, figsize=(6,3))
 ax2[0].hist(desapareguts_homes_edat["Edat.desaparicio"], bins=50)
 ax2[0].set_title("Edat homes")
 ax2[1].hist(desapareguts_dones_edat["Edat.desaparicio"], bins=50, color="orange")
@@ -39,6 +39,7 @@ st.pyplot(fig2, use_container_width=False)
 
 # Boxplot
 fig3, ax3 = plt.subplots(figsize=(6,3))
+my_pal = {"Home": "b", "Dona": "sandy"}
 sns.boxplot(x=desapareguts_edat["Sexe"], y=desapareguts_edat["Edat.desaparicio"], ax=ax3)
 ax3.set(xlabel='Sexe', ylabel='Edat desaparició')
 st.pyplot(fig3, use_container_width=False)
