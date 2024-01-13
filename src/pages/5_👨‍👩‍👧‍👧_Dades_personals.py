@@ -35,7 +35,6 @@ desaparegudes. Visualitzem-ho al següent gràfic de barres.
 desapareguts = pd.read_csv("data/Cens_de_persones_desaparegudes_durant_la_Guerra_Civil_clean.csv")
 
 # Barplot per sex
-# , use_container_width=False
 # figsize=(6,3)
 counts = desapareguts.groupby(["Sexe"])["Sexe"].count()
 y = [counts["Home"], counts["Dona"]]
@@ -43,7 +42,7 @@ x = ["Home", "Dona"]
 fig1, ax1 = plt.subplots()
 color = ['#1F77B4', '#FFA500']
 ax1.bar(x, y, align='center', color=color)
-st.pyplot(fig1)
+st.pyplot(fig1, use_container_width=True)
 
 # Text
 st.markdown("""<p class="big-font">
@@ -66,12 +65,12 @@ informació emmagatzemada), separant per gènere per veure si trobem diferèncie
 desapareguts_edat = desapareguts.loc[desapareguts["Edat.desaparicio"]!=0]
 desapareguts_homes_edat = desapareguts_edat.loc[desapareguts_edat["Sexe"]=="Home"]
 desapareguts_dones_edat = desapareguts_edat.loc[desapareguts_edat["Sexe"]=="Dona"]
-fig2, ax2 = plt.subplots(1, 2, figsize=(6,3))
+fig2, ax2 = plt.subplots(1, 2)
 ax2[0].hist(desapareguts_homes_edat["Edat.desaparicio"], bins=50)
 ax2[0].set_title("Edat homes")
 ax2[1].hist(desapareguts_dones_edat["Edat.desaparicio"], bins=50, color="orange")
 ax2[1].set_title("Edat dones")
-st.pyplot(fig2, use_container_width=False)
+st.pyplot(fig2, use_container_width=True)
 
 # Text
 st.markdown("""<p class="big-font">
@@ -97,11 +96,11 @@ que es troben molt distants de la resta d'edats):
 </p>""", unsafe_allow_html=True)
 
 # Boxplot
-fig3, ax3 = plt.subplots(figsize=(6,3))
+fig3, ax3 = plt.subplots()
 my_pal = {"Home": "#1F77B4", "Dona": "#FFA500"}
 sns.boxplot(x=desapareguts_edat["Sexe"], y=desapareguts_edat["Edat.desaparicio"], ax=ax3, palette=my_pal)
 ax3.set(xlabel='Sexe', ylabel='Edat desaparició')
-st.pyplot(fig3, use_container_width=False)
+st.pyplot(fig3, use_container_width=True)
 
 # Wordcloud Homes
 desapareguts_professio = desapareguts.loc[desapareguts["Professio"].notna()]
@@ -120,7 +119,7 @@ wordcloud_home = WordCloud(width = 700,
 fig4, ax4 = plt.subplots()
 ax4.imshow(wordcloud_home, interpolation='bilinear')
 ax4.axis("off")
-st.pyplot(fig4, use_container_width=False)
+st.pyplot(fig4, use_container_width=True)
 
 # Wordcloud Dones
 desapareguts_dones_professio = desapareguts_professio.loc[desapareguts["Sexe"]=="Dona"]
@@ -137,4 +136,4 @@ wordcloud_dona = WordCloud(width = 700,
 fig5, ax5 = plt.subplots()
 ax5.imshow(wordcloud_dona, interpolation='bilinear')
 ax5.axis("off")
-st.pyplot(fig5, use_container_width=False)
+st.pyplot(fig5, use_container_width=True)
