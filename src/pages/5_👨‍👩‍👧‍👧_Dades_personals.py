@@ -59,7 +59,7 @@ wordcloud_home = WordCloud(width = 700,
                       max_words=500).generate(text_home)
 
 # Display the generated image:
-fig4, ax4 = plt.subplots()
+fig4, ax4 = plt.subplots(figsize=(6,3))
 ax4.imshow(wordcloud_home, interpolation='bilinear')
 ax4.axis("off")
 st.pyplot(fig4)
@@ -76,7 +76,7 @@ wordcloud_dona = WordCloud(width = 700,
                            max_words=500).generate(text_dona)
 
 # Display the generated image:
-fig5, ax5 = plt.subplots()
+fig5, ax5 = plt.subplots(figsize=(6,3))
 ax5.imshow(wordcloud_dona, interpolation='bilinear')
 ax5.axis("off")
 st.pyplot(fig5)
