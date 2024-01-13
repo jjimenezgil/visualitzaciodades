@@ -13,6 +13,10 @@ st.set_page_config(layout="wide",
 # Text
 '''
 # Dades personals
+
+## Gènere
+Com es d'esperar d'una guerra del segle passat, una gran part dels participants eren homes, i així es veu reflectit al cens de persones
+desaparegudes. Visualitzem-ho al següent gràfic de barres.
 '''
 
 # Load data
@@ -26,6 +30,15 @@ fig1, ax1 = plt.subplots(figsize=(6,3))
 color = ['#1F77B4', '#FFA500']
 ax1.bar(x, y, align='center', color=color)
 st.pyplot(fig1, use_container_width=False)
+
+# Text
+'''
+De manera més concreta, trobem registres de 5177 homes desapareguts, però només 129 corresponents a dones. Representen menys d'un 3% de les
+nostres dades!
+
+## Edats
+
+'''
 
 # Age comparison
 desapareguts_edat = desapareguts.loc[desapareguts["Edat.desaparicio"]!=0]
