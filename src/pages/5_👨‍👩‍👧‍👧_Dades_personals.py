@@ -25,9 +25,6 @@ fig1, ax1 = plt.subplots()
 ax1.bar(x, y, align='center')
 st.pyplot(fig1)
 
-# Test barplot
-st.bar_chart(x=x,y=y)
-
 # Age comparison
 desapareguts_edat = desapareguts.loc[desapareguts["Edat.desaparicio"]!=0]
 desapareguts_homes_edat = desapareguts_edat.loc[desapareguts_edat["Sexe"]=="Home"]
