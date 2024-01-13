@@ -36,6 +36,11 @@ ax2[1].hist(desapareguts_dones_edat["Edat.desaparicio"], bins=50, color="orange"
 ax2[1].set_title("Edat dones")
 st.pyplot(fig2)
 
+# Test hist
+st.hist(desapareguts_homes_edat["Edat.desaparicio"], bins=50, color='skyblue', edgecolor='black')
+st.title('Interactive Histogram with Streamlit')
+st.show()
+
 # Boxplot
 fig3, ax3 = plt.subplots()
 sns.boxplot(x=desapareguts_edat["Sexe"], y=desapareguts_edat["Edat.desaparicio"], ax=ax3)
