@@ -62,7 +62,7 @@ wordcloud_home = WordCloud(width = 700,
 fig4, ax4 = plt.subplots(figsize=(6,3))
 ax4.imshow(wordcloud_home, interpolation='bilinear')
 ax4.axis("off")
-st.pyplot(fig4)
+st.pyplot(fig4, use_container_width=False)
 
 # Wordcloud Dones
 desapareguts_dones_professio = desapareguts_professio.loc[desapareguts["Sexe"]=="Dona"]
@@ -79,4 +79,4 @@ wordcloud_dona = WordCloud(width = 700,
 fig5, ax5 = plt.subplots(figsize=(6,3))
 ax5.imshow(wordcloud_dona, interpolation='bilinear')
 ax5.axis("off")
-st.pyplot(fig5)
+st.pyplot(fig5, use_container_width=False)
