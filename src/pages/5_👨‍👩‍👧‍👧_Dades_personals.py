@@ -70,6 +70,17 @@ ax2[1].hist(desapareguts_dones_edat["Edat.desaparicio"], bins=50, color="orange"
 ax2[1].set_title("Edat dones")
 st.pyplot(fig2, use_container_width=False)
 
+# Text
+st.markdown("""<p class="big-font">
+Cal tenir en compte que el camp "Edat.desaparició" és un camp que es va calcular durant el preprocessament de les dades, a partir de la data de 
+desaparició i la data de naixement de cada persona del cens. Per a les persones que no disposaven d'aquesta informació exacta però si de rangs
+d'anys de naixement i de desaparició aproximats, es va utilitzar aquesta darrera informació per calcular l'edat que tenien en el moment de la 
+desaparició. Per a la resta no es va poder calcular l'edat. Es per això que trobem algunes edats inversemblants als histogrames (menors de 10
+anys, per exemple). En qualsevol cas, en general les edats que es mostren als histogrames tenen sentit:
+
+* Per als homes 
+</p>""", unsafe_allow_html=True)
+
 # Boxplot
 fig3, ax3 = plt.subplots(figsize=(6,3))
 my_pal = {"Home": "#1F77B4", "Dona": "#FFA500"}
