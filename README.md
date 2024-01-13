@@ -16,8 +16,6 @@ prèviament. El projecte consta de l'estructura següent:
   * requirements.txt (file): fitxer amb els requeriments (llibreries) del projecte. És important que estigui situat a l'arrel per a que
     l'aplicació es desplegui correctament al servidor de Streamlit.
 
-
-
-
-Use the .rmd file to clean the data contained in "Cens_de_persones_desaparegudes_durant_la_Guerra_Civil.csv" file, making 
-it more useful for data visualisation projects. The resulting file is the one named "Cens_de_persones_desaparegudes_durant_la_Guerra_Civil_clean.csv", which can also be found in this repository.
+## Com visualitzar el projecte?
+L'app Streamlit del projecte és accessible de manera pública i sense necessitat de registre a la següent URL:
+https://visualitzaciodadespra-personesdesaparegudesguerracivil.streamlit.app
