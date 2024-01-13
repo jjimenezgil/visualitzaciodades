@@ -30,7 +30,7 @@ st.pyplot(fig1, use_container_width=False)
 desapareguts_edat = desapareguts.loc[desapareguts["Edat.desaparicio"]!=0]
 desapareguts_homes_edat = desapareguts_edat.loc[desapareguts_edat["Sexe"]=="Home"]
 desapareguts_dones_edat = desapareguts_edat.loc[desapareguts_edat["Sexe"]=="Dona"]
-fig2, ax2 = plt.subplots(1, 2, figsize=(6,3))
+fig2, ax2 = plt.subplots(1, 2, figsize=(7,3))
 ax2[0].hist(desapareguts_homes_edat["Edat.desaparicio"], bins=50)
 ax2[0].set_title("Edat homes")
 ax2[1].hist(desapareguts_dones_edat["Edat.desaparicio"], bins=50, color="orange")
