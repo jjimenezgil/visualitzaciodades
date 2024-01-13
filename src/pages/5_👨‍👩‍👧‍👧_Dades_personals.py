@@ -90,7 +90,9 @@ anys, per exemple). En qualsevol cas, en general les edats que es mostren als hi
   aquesta informació s'extreu de les poques dones que trobem al cens.
   </li>
 </ul>
+</p>""", unsafe_allow_html=True)
 
+st.markdown("""<p class="big-font">
 Al següent boxplot podem visualitzar de manera més clara els rangs d'edats per gèneres i també revisar si trobem outliers a les dades (valors
 que es troben molt distants de la resta d'edats):
 </p>""", unsafe_allow_html=True)
@@ -101,6 +103,12 @@ my_pal = {"Home": "#1F77B4", "Dona": "#FFA500"}
 sns.boxplot(x=desapareguts_edat["Sexe"], y=desapareguts_edat["Edat.desaparicio"], ax=ax3, palette=my_pal)
 ax3.set(xlabel='Sexe', ylabel='Edat desaparició')
 st.pyplot(fig3, use_container_width=True)
+
+st.divider()
+
+'''
+## Ocupacions
+'''
 
 # Wordcloud Homes
 desapareguts_professio = desapareguts.loc[desapareguts["Professio"].notna()]
