@@ -78,9 +78,19 @@ d'anys de naixement i de desaparició aproximats, es va utilitzar aquesta darrer
 desaparició. Per a la resta no es va poder calcular l'edat. Es per això que trobem algunes edats inversemblants als histogrames (menors de 10
 anys, per exemple). En qualsevol cas, en general les edats que es mostren als histogrames tenen sentit:
 <ul>
-  <li class="big-font">Per als homes</li>
-  <li class="big-font">Per a les dones</li>
+  <li class="big-font">
+  Els homes presenten un rang d'edats bastant estret, tots eren persones molt joves, principalment entre els 16 i els 35. Es nota que eren
+  personal militar en edat de servir.
+  </li>
+  <li class="big-font">
+  Les dones presenten una franja d'edats molt més àmplia i dispersa, on trobem persones joves menors de 20 anys però també tenim pics més enllà
+  dels 40. En qualsevol cas, els pics no es poden equiparar als dels homes (veure l'escala de l'eix Y de l'histograma), ja que com hem dit abans,
+  aquesta informació s'extreu de les poques dones que trobem al cens.
+  </li>
 </ul>
+
+Al següent boxplot podem visualitzar de manera més clara els rangs d'edats per gèneres i també revisar si trobem outliers a les dades (valors
+que es troben molt distants de la resta d'edats):
 </p>""", unsafe_allow_html=True)
 
 # Boxplot
