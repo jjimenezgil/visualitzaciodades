@@ -78,8 +78,8 @@ d'anys de naixement i de desaparició aproximats, es va utilitzar aquesta darrer
 desaparició. Per a la resta no es va poder calcular l'edat. Es per això que trobem algunes edats inversemblants als histogrames (menors de 10
 anys, per exemple). En qualsevol cas, en general les edats que es mostren als histogrames tenen sentit:
 <ul>
-  <li>Per als homes</li>
-  <li>Per als homes</li>
+  <li class="big-font">Per als homes</li>
+  <li class="big-font">Per a les dones</li>
 </ul>
 </p>""", unsafe_allow_html=True)
 
