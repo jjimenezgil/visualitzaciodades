@@ -77,8 +77,10 @@ desaparició i la data de naixement de cada persona del cens. Per a les persones
 d'anys de naixement i de desaparició aproximats, es va utilitzar aquesta darrera informació per calcular l'edat que tenien en el moment de la 
 desaparició. Per a la resta no es va poder calcular l'edat. Es per això que trobem algunes edats inversemblants als histogrames (menors de 10
 anys, per exemple). En qualsevol cas, en general les edats que es mostren als histogrames tenen sentit:
-
-* Per als homes 
+<ul>
+  <li>Per als homes</li>
+  <li>Per als homes</li>
+</ul>
 </p>""", unsafe_allow_html=True)
 
 # Boxplot
