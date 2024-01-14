@@ -3,6 +3,19 @@ import plotly.express as px
 import streamlit as st
 
 
+# Config page
+st.set_page_config(layout="wide",
+                   page_title="Dades cronològiques",
+                   page_icon="⏱️")
+
+# Text
+'''
+# Dades cronològiques
+'''
+st.markdown("""<p class="big-font">
+Hola
+</p>""", unsafe_allow_html=True)
+
 # Load data
 desapareguts = pd.read_csv("data/Cens_de_persones_desaparegudes_durant_la_Guerra_Civil_clean.csv")
 desapareguts_aux = desapareguts[desapareguts["Any.desaparicio"]>0]
