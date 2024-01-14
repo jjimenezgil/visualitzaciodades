@@ -13,7 +13,9 @@ st.set_page_config(layout="wide",
 # Dades cronològiques
 '''
 st.markdown("""<p class="big-font">
-En aquesta 
+En aquesta secció visualitzarem el nombre de desaparicions en funció del temps, per veure quins van ser els pitjors anys i també si es van 
+seguir produint desaparicions un cop finalitzada la Guerra Civil, és a dir, durant la dictadura. Podeu manipular el següent gràfic (fer zoom,
+moure els eixos, mostrar les dades només d'homes o dones o ambdues a la vegada...).
 </p>""", unsafe_allow_html=True)
 
 # Load data
