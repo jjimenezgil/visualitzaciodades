@@ -36,7 +36,6 @@ fig.add_shape(
     name="Final Guerra Civil",
     showlegend=True,
     type="line",
-    xref="paper",
     line=dict(dash="dash"),
     x0=1939,
     x1=1939,
