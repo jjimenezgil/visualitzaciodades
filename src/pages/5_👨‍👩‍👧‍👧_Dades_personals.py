@@ -6,7 +6,6 @@ import seaborn as sns
 
 
 # Config page
-# layout="wide",
 st.set_page_config(
                    page_title="Dades personals",
                    page_icon="👨‍👩‍👧‍👧")
@@ -35,7 +34,6 @@ desaparegudes. Visualitzem-ho al següent gràfic de barres.
 desapareguts = pd.read_csv("data/Cens_de_persones_desaparegudes_durant_la_Guerra_Civil_clean.csv")
 
 # Barplot per sex
-# figsize=(6,3)
 counts = desapareguts.groupby(["Sexe"])["Sexe"].count()
 y = [counts["Home"], counts["Dona"]]
 x = ["Home", "Dona"]
