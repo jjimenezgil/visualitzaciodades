@@ -75,7 +75,7 @@ st.pyplot(fig2, use_container_width=True)
 # Text
 st.markdown("""<p class="big-font">
 Cal tenir en compte que el camp "Edat.desaparició" és un camp que es va calcular durant el preprocessament de les dades, a partir de la data de 
-desaparició i la data de naixement de cada persona del cens. Per a les persones que no disposaven d'aquesta informació exacta però si de rangs
+desaparició i la data de naixement de cada persona del cens. Per a les persones que no disposaven d'aquesta informació exacta però sí de rangs
 d'anys de naixement i de desaparició aproximats, es va utilitzar aquesta darrera informació per calcular l'edat que tenien en el moment de la 
 desaparició. Per a la resta no es va poder calcular l'edat. Es per això que trobem algunes edats inversemblants als histogrames (menors de 10
 anys, per exemple). En qualsevol cas, en general les edats que es mostren als histogrames tenen sentit:
@@ -106,9 +106,16 @@ st.pyplot(fig3, use_container_width=True)
 
 st.divider()
 
+# Text
 '''
 ## Ocupacions
+
+### Homes
 '''
+st.markdown("""<p class="big-font">
+Al següent "wordcloud" o núvol de paraules s'exposen les ocupacions dels homes desapareguts durant la Guerra Civil, de tal manera que les 
+ocupacions més freqüents són les que es presenten en primer plà i en mides més grans, i al contrari per a la resta de professions menys freqüents:
+</p>""", unsafe_allow_html=True)
 
 # Wordcloud Homes
 desapareguts_professio = desapareguts.loc[desapareguts["Professio"].notna()]
@@ -129,6 +136,22 @@ ax4.imshow(wordcloud_home, interpolation='bilinear')
 ax4.axis("off")
 st.pyplot(fig4, use_container_width=True)
 
+# Text
+st.markdown("""<p class="big-font">
+Aquestes ocupacions son un reflex de la societat espanyola del moment: una gran majoria dels homes es dedicaven als sectors primari i secundari
+(pagesos, jornalers, forners, fusters, paletes, obrers...). Això també ens diu que una gran majoria de les persones que van participar en la
+Guerra Civil no era personal militar, si no treballadors normals que es van veure abocats a aquesta catàstrofe. Tot i així, també apareixen de
+manera bastant destacada algunes ocupacions militars i policials (militar, guárdia, carrabiner...). Sorprèn també l'aparició en primer plà de
+la professio de capellà, seria interessant saber si van participar com a combatents o donant servei sacerdotal als militar d'un i altre bàndol.
+Per últim, destacar també l'elevat nombre d'estudiants que hi van participar, qui sap si de manera obligatòria o per idealisme (veure l'apartat
+amb les [dades bèl·liques](https://visualitzaciodadespra-personesdesaparegudesguerracivil.streamlit.app/Dades_b%C3%A8l%C2%B7liques) per saber
+la quantitat de voluntaris que trobem al nostre cens.
+</p>""", unsafe_allow_html=True)
+
+'''
+### Dones
+'''
+
 # Wordcloud Dones
 desapareguts_dones_professio = desapareguts_professio.loc[desapareguts["Sexe"]=="Dona"]
 professions_dona = desapareguts_dones_professio["Professio"].tolist()
@@ -145,3 +168,13 @@ fig5, ax5 = plt.subplots()
 ax5.imshow(wordcloud_dona, interpolation='bilinear')
 ax5.axis("off")
 st.pyplot(fig5, use_container_width=True)
+
+# Text
+st.markdown("""<p class="big-font">
+Tot i que tenim molt poca informació, trobem professions molt més especialitzades (mestres i infermeres), tot i que de fons també trobem el 
+mateix popurri de professions que teníem al gènere masculí: pagesses, forneres, minyones, assistents, monjes, botigueres, etc. És d'esperar
+que les infermeres participessin a la guerra en qualitat de serveis mèdics i no pas com a combatents. Pel que fa a les mestres i la resta de
+dones amb altres ocupacions, no és fàcil saber quin va ser el seu paper a la guerra. No es pot descartar que algunes hi participessin com a 
+combatents, ja que la Guerra Civil Espanyola és un dels primers conflictes on les dones van participar en gran número al combat i en funcions
+de recolzament al front (a diferència, per exemple, de la Primera Guerra Mundial).
+</p>""", unsafe_allow_html=True)
