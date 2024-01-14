@@ -13,7 +13,7 @@ st.set_page_config(layout="wide",
 # Dades cronològiques
 '''
 st.markdown("""<p class="big-font">
-Hola
+En aquesta 
 </p>""", unsafe_allow_html=True)
 
 # Load data
@@ -31,5 +31,16 @@ fig.update_layout(
         dtick = 1,
         tickangle = 45
     )
+)
+fig.add_shape(
+    name="Final Guerra Civil",
+    showlegend=True,
+    type="rect",
+    xref="paper",
+    line=dict(dash="dash"),
+    x0=1939,
+    x1=1939,
+    y0=0,
+    y1=2500,
 )
 st.plotly_chart(fig, use_container_width=True)
