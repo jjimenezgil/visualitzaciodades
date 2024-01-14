@@ -6,3 +6,4 @@ geopandas
 wordcloud
 matplotlib
 seaborn
+plotly
