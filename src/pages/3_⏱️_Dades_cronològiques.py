@@ -1,5 +1,6 @@
 import pandas as pd
 import plotly.express as px
+import streamlit as st
 
 
 # Load data
@@ -18,4 +19,4 @@ fig.update_layout(
         tickangle = 45
     )
 )
-fig.show()
+st.plotly_chart(fig, use_container_width=True)
