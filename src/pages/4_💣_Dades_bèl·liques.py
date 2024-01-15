@@ -28,10 +28,7 @@ desapareguts_grouped = desapareguts.groupby(["Es.voluntari", "Exercit"])["Id"].c
 fig = px.bar(desapareguts_grouped, x="Es.voluntari", y="Desapareguts", color="Exercit")
 
 # Show plot
-fig.update_layout(title = 'Composició dels exèrcits', 
-                 title_font_size = 22,
-                 title_x=0.5,
-                 xaxis = dict(
+fig.update_layout(xaxis = dict(
                               title = 'Eren voluntaris?', 
                               title_font_size = 14) 
                  ) 
