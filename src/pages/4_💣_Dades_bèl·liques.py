@@ -15,7 +15,8 @@ st.set_page_config(layout="wide",
 ## Tropes voluntàries
 '''
 st.markdown("""<p class="big-font">
-En aquesta secció visualitzarem el nombre de tropes voluntàries i no voluntàries, i 
+En aquesta secció visualitzarem el nombre de tropes voluntàries i no voluntàries en funció de a quin exèrcit pertanyien: republicans o 
+rebels (també conegut com bàndol nacional).
 </p>""", unsafe_allow_html=True)
 
 # Load data
@@ -38,6 +39,25 @@ fig1.update_layout(xaxis = dict(
                               title_font_size = 16) 
                  ) 
 st.plotly_chart(fig1, use_container_width=True)
+
+# Text
+st.markdown("""<p class="big-font">
+Trobem que el cens de persones desaparegudes està conformat en gran part per desapareguts de l'exèrcit republicà, i només hi consten 139 persones
+del bàndol rebel. També hi ha un elevat nombre de persones (1772) per a les quals no es coneix el bàndol en el qual van lluitar. Pel que fa als 
+voluntaris, en trobem molt pocs independentment de l'exèrcit (republicà, nacional o desconegut). Podem concloure, doncs, que la major part
+de les persones registrades al cens de persones desaparegudes de la Generalitat de Catalunya van ser llevades de manera obligatòria. Es recomanable
+fer zoom a les diferents parts del gràfic de barres per conèixer de manera exacta el nombre de voluntaris i no voluntaris de cada exèrcit.
+</p>""", unsafe_allow_html=True)
+
+st.divider()
+
+# Text
+'''
+## Afussellaments
+'''
+st.markdown("""<p class="big-font">
+En aquesta secció
+</p>""", unsafe_allow_html=True)
 
 # Stacked barplot
 fig2 = px.bar(desapareguts_grouped_af, x="Exercit", y="Desapareguts", color="Es.afusellat")
