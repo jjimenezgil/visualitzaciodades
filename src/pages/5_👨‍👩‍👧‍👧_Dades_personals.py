@@ -4,6 +4,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
+from plotly.subplots import make_subplots
 
 
 # Config page
@@ -67,12 +68,17 @@ ax2[1].hist(desapareguts_dones_edat["Edat.desaparicio"], bins=50, color="orange"
 ax2[1].set_title("Edat dones")
 st.pyplot(fig2, use_container_width=True)
 
-figtest1 = px.histogram(desapareguts_dones_edat, x="Edat.desaparicio",
-                   title='Edat homes',
-                   opacity=0.8,
-                   color_discrete_sequence=['#FFA500'],
-                   nbins=60
-                   )
+figtest1 = make_subplots(rows=1, cols=2)
+figtest1.add_trace(
+    px.histogram(desapareguts_dones_edat, x="Edat.desaparicio", title='Edat dones',
+                 opacity=0.8, color_discrete_sequence=['#FFA500'], nbins=70),
+    row=1, col=1
+)
+figtest1.add_trace(
+    px.histogram(desapareguts_homes_edat, x="Edat.desaparicio", title='Edat homes',
+                 opacity=0.8, color_discrete_sequence=['#1F77B4'], nbins=70),
+    row=1, col=1
+)
 st.plotly_chart(figtest1, use_container_width=True)
 
 # Text
