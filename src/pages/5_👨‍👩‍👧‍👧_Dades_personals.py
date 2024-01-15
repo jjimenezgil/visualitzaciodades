@@ -60,12 +60,12 @@ informació emmagatzemada), separant per gènere per veure si trobem diferèncie
 desapareguts_edat = desapareguts.loc[desapareguts["Edat.desaparicio"]!=0]
 desapareguts_homes_edat = desapareguts_edat.loc[desapareguts_edat["Sexe"]=="Home"]
 desapareguts_dones_edat = desapareguts_edat.loc[desapareguts_edat["Sexe"]=="Dona"]
-fig2 = make_subplots(rows=1, cols=2)
+fig2 = make_subplots(rows=1, cols=2, subplot_titles=('Edat dones', 'Edat homes'))
 
 hist1 = px.histogram(desapareguts_dones_edat, x="Edat.desaparicio", 
-                     title='Edat dones', opacity=0.8, color_discrete_sequence=['#83C9FF'], nbins=70)
+                     opacity=0.8, color_discrete_sequence=['#83C9FF'], nbins=70)
 hist2 = px.histogram(desapareguts_homes_edat, x="Edat.desaparicio", 
-                     title='Edat homes', opacity=0.8, color_discrete_sequence=['#0068C9'], nbins=70)
+                     opacity=0.8, color_discrete_sequence=['#0068C9'], nbins=70)
 
 figure1_traces = []
 figure2_traces = []
