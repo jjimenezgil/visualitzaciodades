@@ -20,16 +20,29 @@ En aquesta secció visualitzarem ...
 desapareguts = pd.read_csv("data/Cens_de_persones_desaparegudes_durant_la_Guerra_Civil_clean.csv")
 desapareguts.loc[desapareguts["Es.voluntari"]==1, "Es.voluntari"] = "Voluntari"
 desapareguts.loc[desapareguts["Es.voluntari"]==0, "Es.voluntari"] = "No voluntari"
+desapareguts.loc[desapareguts["Es.afusellat"]==1, "Es.afusellat"] = "Afussellat"
+desapareguts.loc[desapareguts["Es.afusellat"]==0, "Es.afusellat"] = "No afussellat"
 
 # Prepare data
-desapareguts_grouped = desapareguts.groupby(["Es.voluntari", "Exercit"])["Id"].count().reset_index(name="Desapareguts")
+desapareguts_grouped_vol = desapareguts.groupby(["Es.voluntari", "Exercit"])["Id"].count().reset_index(name="Desapareguts")
+desapareguts_grouped_af = desapareguts.groupby(["Es.afusellat", "Exercit"])["Id"].count().reset_index(name="Desapareguts")
 
 # Stacked barplot
-fig = px.bar(desapareguts_grouped, x="Es.voluntari", y="Desapareguts", color="Exercit")
+fig1 = px.bar(desapareguts_grouped_vol, x="Es.voluntari", y="Desapareguts", color="Exercit")
 
 # Show plot
-fig.update_layout(xaxis = dict(
+fig1.update_layout(xaxis = dict(
                               title = 'Eren voluntaris?', 
-                              title_font_size = 14) 
+                              title_font_size = 16) 
                  ) 
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig1, use_container_width=True)
+
+# Stacked barplot
+fig2 = px.bar(desapareguts_grouped_af, x="Es.afusellat", y="Desapareguts", color="Exercit")
+
+# Show plot
+fig2.update_layout(xaxis = dict(
+                              title = 'Van ser afussellats?', 
+                              title_font_size = 16) 
+                 ) 
+st.plotly_chart(fig2, use_container_width=True)
