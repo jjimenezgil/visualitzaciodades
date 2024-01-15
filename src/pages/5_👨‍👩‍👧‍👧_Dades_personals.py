@@ -3,6 +3,7 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
+import plotly.express as px
 
 
 # Config page
@@ -34,13 +35,9 @@ desaparegudes. Visualitzem-ho al següent gràfic de barres.
 desapareguts = pd.read_csv("data/Cens_de_persones_desaparegudes_durant_la_Guerra_Civil_clean.csv")
 
 # Barplot per sex
-counts = desapareguts.groupby(["Sexe"])["Sexe"].count()
-y = [counts["Home"], counts["Dona"]]
-x = ["Home", "Dona"]
-fig1, ax1 = plt.subplots()
-color = ['#1F77B4', '#FFA500']
-ax1.bar(x, y, align='center', color=color)
-st.pyplot(fig1, use_container_width=True)
+countPerSexe = desapareguts.groupby(["Sexe"])["Id"].count().reset_index(name="Desapareguts")
+fig1 = px.bar(countPerSexe, x="Sexe", y="Desapareguts")
+st.plotly_chart(fig1, use_container_width=True)
 
 # Text
 st.markdown("""<p class="big-font">
