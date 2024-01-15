@@ -56,7 +56,8 @@ st.divider()
 ## Afussellaments
 '''
 st.markdown("""<p class="big-font">
-En aquesta secció
+El següent gràfic de barres mostra el nombre de persones afussellades i no afussellades, de nou, en funció a l'exèrcit en el qual va lluitar 
+cadascú.
 </p>""", unsafe_allow_html=True)
 
 # Stacked barplot
@@ -68,3 +69,9 @@ fig2.update_layout(xaxis = dict(
                               title_font_size = 16) 
                  ) 
 st.plotly_chart(fig2, use_container_width=True)
+
+# Text
+st.markdown("""<p class="big-font">
+El nombre de persones afussellades al cens de persones desaparegudes és també bastant baix. El nombre més elevat de persones executades d'aquesta
+manera el trobem als exèrcits "desconegut" (234) i republicà (52). Al bàndol rebel només consta una persona afussellada.
+</p>""", unsafe_allow_html=True)
