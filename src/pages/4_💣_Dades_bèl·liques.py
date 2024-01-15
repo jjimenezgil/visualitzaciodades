@@ -25,7 +25,7 @@ desapareguts.loc[desapareguts["Es.voluntari"]==0, "Es.voluntari"] = "No voluntar
 desapareguts_grouped = desapareguts.groupby(["Es.voluntari", "Exercit"])["Id"].count().reset_index(name="Desapareguts")
 
 # Stacked barplot
-fig = px.bar(desapareguts_grouped, x="Es.voluntari", y="Desapareguts", color="Exercit", barmode='group')
+fig = px.bar(desapareguts_grouped, x="Es.voluntari", y="Desapareguts", color="Exercit")
 
 # Show plot
 fig.update_layout(xaxis = dict(
