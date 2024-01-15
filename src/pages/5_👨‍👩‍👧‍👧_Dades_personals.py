@@ -2,7 +2,6 @@ from wordcloud import WordCloud
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
-import seaborn as sns
 import plotly.express as px
 from plotly.subplots import make_subplots
 
@@ -109,14 +108,8 @@ que es troben molt distants de la resta d'edats):
 </p>""", unsafe_allow_html=True)
 
 # Boxplot
-fig3, ax3 = plt.subplots()
-my_pal = {"Home": "#1F77B4", "Dona": "#FFA500"}
-sns.boxplot(x=desapareguts_edat["Sexe"], y=desapareguts_edat["Edat.desaparicio"], ax=ax3, palette=my_pal)
-ax3.set(xlabel='Sexe', ylabel='Edat desaparició')
-st.pyplot(fig3, use_container_width=True)
-
-figtest = px.box(desapareguts_edat, y="Edat.desaparicio", color="Sexe")
-st.plotly_chart(figtest, use_container_width=True)
+fig3 = px.box(desapareguts_edat, y="Edat.desaparicio", color="Sexe")
+st.plotly_chart(fig3, use_container_width=True)
 
 st.divider()
 
