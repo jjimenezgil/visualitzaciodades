@@ -67,6 +67,13 @@ ax2[1].hist(desapareguts_dones_edat["Edat.desaparicio"], bins=50, color="orange"
 ax2[1].set_title("Edat dones")
 st.pyplot(fig2, use_container_width=True)
 
+figtest1 = px.histogram(desapareguts_dones_edat, x="Edat.desaparicio",
+                   title='Edat homes',
+                   opacity=0.8,
+                   color_discrete_sequence=['indianred'] # color of histogram bars
+                   )
+st.plotly_chart(figtest1, use_container_width=True)
+
 # Text
 st.markdown("""<p class="big-font">
 Cal tenir en compte que el camp "Edat.desaparició" és un camp que es va calcular durant el preprocessament de les dades, a partir de la data de 
