@@ -11,9 +11,11 @@ st.set_page_config(layout="wide",
 # Text
 '''
 # Dades bèl·liques
+
+## Tropes voluntàries
 '''
 st.markdown("""<p class="big-font">
-En aquesta secció visualitzarem ...
+En aquesta secció visualitzarem el nombre de tropes voluntàries i no voluntàries, i 
 </p>""", unsafe_allow_html=True)
 
 # Load data
@@ -24,11 +26,11 @@ desapareguts.loc[desapareguts["Es.afusellat"]==1, "Es.afusellat"] = "Afussellat"
 desapareguts.loc[desapareguts["Es.afusellat"]==0, "Es.afusellat"] = "No afussellat"
 
 # Prepare data
-desapareguts_grouped_vol = desapareguts.groupby(["Es.voluntari", "Exercit"])["Id"].count().reset_index(name="Desapareguts")
-desapareguts_grouped_af = desapareguts.groupby(["Es.afusellat", "Exercit"])["Id"].count().reset_index(name="Desapareguts")
+desapareguts_grouped_vol = desapareguts.groupby(["Exercit","Es.voluntari"])["Id"].count().reset_index(name="Desapareguts")
+desapareguts_grouped_af = desapareguts.groupby(["Exercit","Es.afusellat"])["Id"].count().reset_index(name="Desapareguts")
 
 # Stacked barplot
-fig1 = px.bar(desapareguts_grouped_vol, x="Es.voluntari", y="Desapareguts", color="Exercit")
+fig1 = px.bar(desapareguts_grouped_vol, x="Exercit", y="Desapareguts", color="Es.voluntari")
 
 # Show plot
 fig1.update_layout(xaxis = dict(
@@ -38,7 +40,7 @@ fig1.update_layout(xaxis = dict(
 st.plotly_chart(fig1, use_container_width=True)
 
 # Stacked barplot
-fig2 = px.bar(desapareguts_grouped_af, x="Es.afusellat", y="Desapareguts", color="Exercit")
+fig2 = px.bar(desapareguts_grouped_af, x="Exercit", y="Desapareguts", color="Es.afusellat")
 
 # Show plot
 fig2.update_layout(xaxis = dict(
