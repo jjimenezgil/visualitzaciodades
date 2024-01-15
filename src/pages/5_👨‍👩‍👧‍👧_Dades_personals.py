@@ -36,7 +36,7 @@ desapareguts = pd.read_csv("data/Cens_de_persones_desaparegudes_durant_la_Guerra
 
 # Barplot per sex
 countPerSexe = desapareguts.groupby(["Sexe"])["Id"].count().reset_index(name="Desapareguts")
-fig1 = px.bar(countPerSexe, x="Sexe", y="Desapareguts")
+fig1 = px.bar(countPerSexe, x="Sexe", y="Desapareguts", color="Sexe")
 st.plotly_chart(fig1, use_container_width=True)
 
 # Text
