@@ -112,6 +112,13 @@ desapareguts_edat.sort_values(by="Sexe", ascending=True, inplace=True)
 fig3 = px.box(desapareguts_edat, y="Edat.desaparicio", color="Sexe")
 st.plotly_chart(fig3, use_container_width=True)
 
+#Text
+st.markdown("""<p class="big-font">
+Com podem veure als boxplots, curiosament, els dos sexes presenten la mateixa mediana d'edat, 28 anys, però com comentavem abans, el rang d'edats
+de les dones és molt més àmpli. Si agafem com a mesura del Q1 al Q3 del boxplot, el rang d'edats de les dones va de 21 a gairebé 43 anys. En canvi,
+el dels homes va de 21 a només 33 anys. En qualsevol cas, podem concloure que la major part de les persones presents al cens són molt joves.
+</p>""", unsafe_allow_html=True)
+
 st.divider()
 
 # Text
