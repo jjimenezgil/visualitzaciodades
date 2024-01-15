@@ -62,9 +62,26 @@ desapareguts_edat = desapareguts.loc[desapareguts["Edat.desaparicio"]!=0]
 desapareguts_homes_edat = desapareguts_edat.loc[desapareguts_edat["Sexe"]=="Home"]
 desapareguts_dones_edat = desapareguts_edat.loc[desapareguts_edat["Sexe"]=="Dona"]
 fig2 = make_subplots(rows=1, cols=2)
-fig2.add_trace(px.histogram(desapareguts_dones_edat, x="Edat.desaparicio", title='Edat dones', opacity=0.8, color_discrete_sequence=['#FFA500'], nbins=70), row=1, col=1)
-fig2.add_trace(px.histogram(desapareguts_homes_edat, x="Edat.desaparicio", title='Edat homes', opacity=0.8, color_discrete_sequence=['#1F77B4'], nbins=70), row=1, col=2)
+
+hist1 = px.histogram(desapareguts_dones_edat, x="Edat.desaparicio", 
+                     title='Edat dones', opacity=0.8, color_discrete_sequence=['#FFA500'], nbins=70)
+hist2 = px.histogram(desapareguts_homes_edat, x="Edat.desaparicio", 
+                     title='Edat homes', opacity=0.8, color_discrete_sequence=['#1F77B4'], nbins=70)
+
+figure1_traces = []
+figure2_traces = []
+for trace in range(len(hist1["data"])):
+    figure1_traces.append(hist1["data"][trace])
+for trace in range(len(hist2["data"])):
+    figure2_traces.append(hist2["data"][trace])
+
+# Get the Express fig broken down as traces and add the traces to the proper plot within in the subplot
+for traces in figure1_traces:
+    fig2.append_trace(traces, row=1, col=1)
+for traces in figure2_traces:
+    fig2.append_trace(traces, row=1, col=2)
 st.plotly_chart(fig2, use_container_width=True)
+
 
 # Text
 st.markdown("""<p class="big-font">
