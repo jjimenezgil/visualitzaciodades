@@ -159,8 +159,8 @@ Guerra Civil no era personal militar, si no treballadors normals que es van veur
 manera bastant destacada algunes ocupacions militars i policials (militar, guárdia, carrabiner...). Sorprèn també l'aparició en primer plà de
 la professio de capellà, seria interessant saber si van participar com a combatents o donant servei sacerdotal als militar d'un i altre bàndol.
 Per últim, destacar també l'elevat nombre d'estudiants que hi van participar, qui sap si de manera obligatòria o per idealisme (veure l'apartat
-amb les [dades bèl·liques](https://visualitzaciodadespra-personesdesaparegudesguerracivil.streamlit.app/Dades_b%C3%A8l%C2%B7liques) per saber
-la quantitat de voluntaris que trobem al nostre cens.
+amb les <a href="https://visualitzaciodadespra-personesdesaparegudesguerracivil.streamlit.app/Dades_b%C3%A8l%C2%B7liques">dades bèl·liques</a> 
+per saber la quantitat de voluntaris que trobem al nostre cens).
 </p>""", unsafe_allow_html=True)
 
 '''
