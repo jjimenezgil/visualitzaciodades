@@ -7,7 +7,7 @@ from plotly.subplots import make_subplots
 
 
 # Config page
-st.set_page_config(
+st.set_page_config(layout="wide",
                    page_title="Dades personals",
                    page_icon="👨‍👩‍👧‍👧")
 
