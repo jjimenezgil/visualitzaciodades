@@ -61,25 +61,16 @@ informació emmagatzemada), separant per gènere per veure si trobem diferèncie
 desapareguts_edat = desapareguts.loc[desapareguts["Edat.desaparicio"]!=0]
 desapareguts_homes_edat = desapareguts_edat.loc[desapareguts_edat["Sexe"]=="Home"]
 desapareguts_dones_edat = desapareguts_edat.loc[desapareguts_edat["Sexe"]=="Dona"]
-fig2, ax2 = plt.subplots(1, 2)
-ax2[0].hist(desapareguts_homes_edat["Edat.desaparicio"], bins=50)
-ax2[0].set_title("Edat homes")
-ax2[1].hist(desapareguts_dones_edat["Edat.desaparicio"], bins=50, color="orange")
-ax2[1].set_title("Edat dones")
-st.pyplot(fig2, use_container_width=True)
-
-figtest1 = make_subplots(rows=1, cols=2)
-figtest1.add_trace(
-    px.histogram(desapareguts_dones_edat, x="Edat.desaparicio", title='Edat dones',
-                 opacity=0.8, color_discrete_sequence=['#FFA500'], nbins=70),
+fig2 = make_subplots(rows=1, cols=2)
+fig2.add_trace(
+    px.histogram(desapareguts_dones_edat, x="Edat.desaparicio", title='Edat dones', opacity=0.8, color_discrete_sequence=['#FFA500'], nbins=70),
     row=1, col=1
 )
-figtest1.add_trace(
-    px.histogram(desapareguts_homes_edat, x="Edat.desaparicio", title='Edat homes',
-                 opacity=0.8, color_discrete_sequence=['#1F77B4'], nbins=70),
-    row=1, col=1
+fig2.add_trace(
+    px.histogram(desapareguts_homes_edat, x="Edat.desaparicio", title='Edat homes', opacity=0.8, color_discrete_sequence=['#1F77B4'], nbins=70),
+    row=1, col=2
 )
-st.plotly_chart(figtest1, use_container_width=True)
+st.plotly_chart(fig2, use_container_width=True)
 
 # Text
 st.markdown("""<p class="big-font">
