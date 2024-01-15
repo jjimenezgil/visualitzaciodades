@@ -62,14 +62,8 @@ desapareguts_edat = desapareguts.loc[desapareguts["Edat.desaparicio"]!=0]
 desapareguts_homes_edat = desapareguts_edat.loc[desapareguts_edat["Sexe"]=="Home"]
 desapareguts_dones_edat = desapareguts_edat.loc[desapareguts_edat["Sexe"]=="Dona"]
 fig2 = make_subplots(rows=1, cols=2)
-fig2.add_trace(
-    px.histogram(desapareguts_dones_edat, x="Edat.desaparicio", title='Edat dones', opacity=0.8, color_discrete_sequence=['#FFA500'], nbins=70),
-    row=1, col=1
-)
-fig2.add_trace(
-    px.histogram(desapareguts_homes_edat, x="Edat.desaparicio", title='Edat homes', opacity=0.8, color_discrete_sequence=['#1F77B4'], nbins=70),
-    row=1, col=2
-)
+fig2.add_trace(px.histogram(desapareguts_dones_edat, x="Edat.desaparicio", title='Edat dones', opacity=0.8, color_discrete_sequence=['#FFA500'], nbins=70), row=1, col=1)
+fig2.add_trace(px.histogram(desapareguts_homes_edat, x="Edat.desaparicio", title='Edat homes', opacity=0.8, color_discrete_sequence=['#1F77B4'], nbins=70), row=1, col=2)
 st.plotly_chart(fig2, use_container_width=True)
 
 # Text
