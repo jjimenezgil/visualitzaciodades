@@ -108,6 +108,7 @@ que es troben molt distants de la resta d'edats):
 </p>""", unsafe_allow_html=True)
 
 # Boxplot
+desapareguts_edat.sort_values(by="Sexe", ascending=True, inplace=True)
 fig3 = px.box(desapareguts_edat, y="Edat.desaparicio", color="Sexe")
 st.plotly_chart(fig3, use_container_width=True)
 
