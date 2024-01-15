@@ -70,8 +70,8 @@ st.pyplot(fig2, use_container_width=True)
 figtest1 = px.histogram(desapareguts_dones_edat, x="Edat.desaparicio",
                    title='Edat homes',
                    opacity=0.8,
-                   color_discrete_sequence=['indianred'],
-                   nbins=50
+                   color_discrete_sequence=['#FFA500'],
+                   nbins=60
                    )
 st.plotly_chart(figtest1, use_container_width=True)
 
