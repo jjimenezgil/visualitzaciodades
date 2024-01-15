@@ -115,6 +115,9 @@ sns.boxplot(x=desapareguts_edat["Sexe"], y=desapareguts_edat["Edat.desaparicio"]
 ax3.set(xlabel='Sexe', ylabel='Edat desaparició')
 st.pyplot(fig3, use_container_width=True)
 
+figtest = px.box(desapareguts_edat, y="Edat.desaparicio", color="Sexe")
+st.plotly_chart(figtest, use_container_width=True)
+
 st.divider()
 
 # Text
